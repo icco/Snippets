@@ -6,5 +6,6 @@
   <string name="action_settings">Settings</string>
   <string name="title_activity_snippet_list">Snippet List</string>
   <string name="empty_list">No snippets saved yet.</string>
+  <string name="button_text">Save</string>
 
 </resources>

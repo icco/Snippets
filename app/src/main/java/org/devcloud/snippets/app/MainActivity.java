@@ -3,6 +3,7 @@ package org.devcloud.snippets.app;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.EditText;
 
 
 public class MainActivity extends Activity {
@@ -48,7 +50,9 @@ public class MainActivity extends Activity {
   /**
    * Beginning fragment for saving a comment.
    */
-  public static class NewPostFragment extends Fragment {
+  public class NewPostFragment extends Fragment {
+
+    public final static String EXTRA_MESSAGE = "org.devcloud.snippets.app.MESSAGE";
 
     public NewPostFragment() {
     }
@@ -57,6 +61,16 @@ public class MainActivity extends Activity {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View rootView = inflater.inflate(R.layout.fragment_main, container, false);
       return rootView;
+    }
+
+    public void sendMessage(View view) {
+      Intent intent = new Intent(getActivity(), SnippetList.class);
+
+      // This is the message we are throwing with the intent.
+      EditText editText = (EditText) findViewById(R.id.edit_message);
+      String message = editText.getText().toString();
+      intent.putExtra(EXTRA_MESSAGE, message);
+      startActivity(intent);
     }
   }
 }
