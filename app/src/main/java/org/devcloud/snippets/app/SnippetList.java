@@ -8,17 +8,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.FragmentActivity;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 
-public class SnippetList extends Activity {
+public class SnippetList extends FragmentActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_snippet_list);
+
     if (savedInstanceState == null) {
-      getFragmentManager().beginTransaction()
-          .add(R.id.container, new PlaceholderFragment())
+      getSupportFragmentManager().beginTransaction()
+          .add(R.id.container, new SnippetListFragment())
           .commit();
     }
   }
@@ -47,15 +53,18 @@ public class SnippetList extends Activity {
   /**
    * A placeholder fragment containing a simple view.
    */
-  public static class PlaceholderFragment extends Fragment {
+  public static class SnippetListFragment extends ListFragment {
 
-    public PlaceholderFragment() {
+    public SnippetListFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View rootView = inflater.inflate(R.layout.fragment_snippet_list, container, false);
+
+      ArrayAdapter<String> snippet_list;
+      snippet_list = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, new ArrayList<String>());
+      setListAdapter(snippet_list);
       return rootView;
     }
   }
