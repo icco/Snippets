@@ -1,4 +1,3 @@
-Snippets
-========
+# Snippets
 
-Android App for journaling
+Android App for journaling.
