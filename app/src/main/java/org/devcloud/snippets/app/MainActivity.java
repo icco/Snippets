@@ -20,7 +20,7 @@ public class MainActivity extends Activity {
     setContentView(R.layout.activity_main);
     if (savedInstanceState == null) {
       getFragmentManager().beginTransaction()
-          .add(R.id.container, new PlaceholderFragment())
+          .add(R.id.container, new NewPostFragment())
           .commit();
     }
   }
@@ -46,20 +46,17 @@ public class MainActivity extends Activity {
   }
 
   /**
-   * A placeholder fragment containing a simple view.
+   * Beginning fragment for saving a comment.
    */
-  public static class PlaceholderFragment extends Fragment {
+  public static class NewPostFragment extends Fragment {
 
-    public PlaceholderFragment() {
+    public NewPostFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View rootView = inflater.inflate(R.layout.fragment_main, container, false);
       return rootView;
     }
   }
-
-
 }
