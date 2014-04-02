@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,8 +14,12 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.EditText;
 
+import java.io.IOException;
+
 
 public class MainActivity extends Activity {
+
+  private static final String TAG = "MainActivity";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,25 @@ public class MainActivity extends Activity {
           .add(R.id.container, new NewPostFragment())
           .commit();
     }
+  }
+
+
+  public void saveMessage(View view) {
+
+    // Get the text.
+    EditText editText = (EditText) findViewById(R.id.edit_message);
+    String message = editText.getText().toString();
+
+    try {
+      // Save the text.
+      Snippet snippet = new Snippet(message);
+      snippet.save(getApplicationContext());
+    } catch (IOException e) {
+      Log.e(TAG, e.getMessage(), e);
+    }
+
+    Intent intent = new Intent(this, SnippetList.class);
+    startActivity(intent);
   }
 
   @Override
@@ -52,7 +76,6 @@ public class MainActivity extends Activity {
    */
   public class NewPostFragment extends Fragment {
 
-    public final static String EXTRA_MESSAGE = "org.devcloud.snippets.app.MESSAGE";
 
     public NewPostFragment() {
     }
@@ -63,14 +86,5 @@ public class MainActivity extends Activity {
       return rootView;
     }
 
-    public void sendMessage(View view) {
-      Intent intent = new Intent(getActivity(), SnippetList.class);
-
-      // This is the message we are throwing with the intent.
-      EditText editText = (EditText) findViewById(R.id.edit_message);
-      String message = editText.getText().toString();
-      intent.putExtra(EXTRA_MESSAGE, message);
-      startActivity(intent);
-    }
   }
 }

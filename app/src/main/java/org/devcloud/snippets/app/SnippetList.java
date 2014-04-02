@@ -3,6 +3,7 @@ package org.devcloud.snippets.app;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,10 +13,13 @@ import android.support.v4.app.ListFragment;
 import android.support.v4.app.FragmentActivity;
 import android.widget.ArrayAdapter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class SnippetList extends FragmentActivity {
+
+  static final String TAG = "SnippetList";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +66,15 @@ public class SnippetList extends FragmentActivity {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
       View rootView = inflater.inflate(R.layout.fragment_snippet_list, container, false);
 
-      ArrayAdapter<String> snippet_list;
-      snippet_list = new ArrayAdapter<String>(inflater.getContext(), android.R.layout.simple_list_item_1, new ArrayList<String>());
-      setListAdapter(snippet_list);
+      try {
+        ArrayAdapter<Snippet> snippet_list;
+        ArrayList<Snippet> snippets = Snippet.loadAll(this.getActivity().getApplicationContext());
+
+        snippet_list = new ArrayAdapter<Snippet>(inflater.getContext(), android.R.layout.simple_list_item_1, snippets);
+        setListAdapter(snippet_list);
+      } catch (IOException e) {
+        Log.e(TAG, "Problem loading data from DB.", e);
+      }
       return rootView;
     }
   }

@@ -25,5 +25,5 @@
       android:text="@string/button_text"
       android:id="@+id/button"
       android:layout_weight="1"
-      android:onClick="sendMessage" />
+      android:onClick="saveMessage" />
 </LinearLayout>
