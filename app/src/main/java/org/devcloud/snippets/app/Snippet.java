@@ -27,6 +27,7 @@ public class Snippet {
     this.setCreated(new Date());
   }
 
+  // TODO: Change this to this: https://developer.android.com/guide/topics/ui/layout/listview.html
   public static ArrayList<Snippet> loadAll(Context context) throws IOException {
     DatabaseHelper mDbHelper = new DatabaseHelper(context);
     ArrayList<Snippet> list = new ArrayList<Snippet>();
@@ -57,6 +58,10 @@ public class Snippet {
     }
 
     return list;
+  }
+
+  public String toString() {
+    return this.getText() + " - " + this.getCreated().toString();
   }
 
   public String getText() {
