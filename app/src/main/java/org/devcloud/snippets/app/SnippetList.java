@@ -1,16 +1,14 @@
 package org.devcloud.snippets.app;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.FragmentActivity;
 import android.widget.ArrayAdapter;
 
 import java.io.IOException;

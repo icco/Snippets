@@ -16,13 +16,10 @@ public class Snippet {
 
   public final static String COLUMN_NAME_TEXT = "text";
   public final static String COLUMN_TYPE_TEXT = "text";
-  private static final String TAG = "Snippet";
-
-  private String text;
-
   public final static String COLUMN_NAME_DATE = "created";
   public final static String COLUMN_TYPE_DATE = "datetime";
-
+  private static final String TAG = "Snippet";
+  private String text;
   private Date created;
 
   public Snippet(String msg) {
@@ -30,16 +27,48 @@ public class Snippet {
     this.setCreated(new Date());
   }
 
+  public static ArrayList<Snippet> loadAll(Context context) throws IOException {
+    DatabaseHelper mDbHelper = new DatabaseHelper(context);
+    ArrayList<Snippet> list = new ArrayList<Snippet>();
+
+    // Gets the data repository in write mode
+    SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+    if (db == null) {
+      throw new IOException("Database not readable.");
+    }
+
+    String[] columns = {COLUMN_NAME_TEXT, COLUMN_NAME_DATE};
+    String[] empty = {};
+    Cursor cursor = db.query(TABLE_NAME, columns, "", empty, "", "", COLUMN_NAME_DATE);
+
+    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+      Snippet s = new Snippet(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_TEXT)));
+      String date = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE));
+
+      try {
+        s.setCreated(DatabaseHelper.parseDate(date));
+        list.add(s);
+        Log.d(TAG, "Loaded an entry");
+      } catch (ParseException e) {
+        Log.e(TAG, "Couldn't parse date.", e);
+        continue;
+      }
+    }
+
+    return list;
+  }
+
   public String getText() {
     return text;
   }
 
-  public Date getCreated() {
-    return created;
-  }
-
   private void setText(String text) {
     this.text = text;
+  }
+
+  public Date getCreated() {
+    return created;
   }
 
   private void setCreated(Date created) {
@@ -63,37 +92,5 @@ public class Snippet {
 
     // Insert the new row, returning the primary key value of the new row
     return db.insert(this.TABLE_NAME, "", values);
-  }
-
-  public static ArrayList<Snippet> loadAll(Context context) throws IOException {
-    DatabaseHelper mDbHelper = new DatabaseHelper(context);
-    ArrayList<Snippet> list = new ArrayList<Snippet>();
-
-    // Gets the data repository in write mode
-    SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
-    if (db == null) {
-      throw new IOException("Database not readable.");
-    }
-
-    String[] columns = {COLUMN_NAME_TEXT, COLUMN_NAME_DATE};
-    String [] empty = {};
-    Cursor cursor = db.query(TABLE_NAME, columns, "", empty, "", "", COLUMN_NAME_DATE);
-
-    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-      Snippet s = new Snippet(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_TEXT)));
-      String date = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE));
-
-      try {
-        s.setCreated(DatabaseHelper.parseDate(date));
-        list.add(s);
-        Log.d(TAG, "Loaded an entry");
-      } catch (ParseException e) {
-        Log.e(TAG, "Couldn't parse date.", e);
-        continue;
-      }
-    }
-
-    return list;
   }
 }

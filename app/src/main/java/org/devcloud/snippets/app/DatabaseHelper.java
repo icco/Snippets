@@ -19,6 +19,20 @@ class DatabaseHelper extends SQLiteOpenHelper {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
   }
 
+  public static Date parseDate(String date) throws ParseException {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    return dateFormat.parse(date);
+  }
+
+  public static String fmtDate(Date date) {
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    if (date == null) {
+      date = new Date();
+    }
+
+    return dateFormat.format(date);
+  }
+
   public void onCreate(SQLiteDatabase db) {
     db.execSQL("CREATE TABLE " + Snippet.TABLE_NAME + " (id INTEGER PRIMARY KEY," +
         Snippet.COLUMN_NAME_TEXT + " " + Snippet.COLUMN_TYPE_TEXT + " NOT NULL, " +
@@ -35,19 +49,5 @@ class DatabaseHelper extends SQLiteOpenHelper {
 
   public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     onUpgrade(db, oldVersion, newVersion);
-  }
-
-  public static Date parseDate(String date) throws ParseException {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-    return dateFormat.parse(date);
-  }
-
-  public static String fmtDate(Date date) {
-    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-    if (date == null) {
-      date = new Date();
-    }
-
-    return dateFormat.format(date);
   }
 }
