@@ -10,10 +10,25 @@ android {
     versionCode 1
     versionName "1.0"
   }
+
+  signingConfigs {
+    debug {
+      storeFile file("debug.keystore")
+    }
+
+    release {
+      storeFile file(System.getenv("ANDROID_KEYSTORE"))
+      storePassword System.console().readLine("\n\$ Enter keystore password: ")
+      keyAlias "Snippets"
+      keyPassword System.console().readLine("\n\$ Enter key password: ")
+    }
+  }
+
   buildTypes {
     release {
-      runProguard false
+      runProguard true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+      signingConfig signingConfigs.release
     }
   }
 }
