@@ -74,7 +74,6 @@ public class MainActivity extends Activity {
    */
   public static class NewPostFragment extends Fragment {
 
-
     public NewPostFragment() { }
 
     @Override

@@ -1,4 +1,4 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
@@ -8,22 +8,29 @@
     android:orientation="vertical">
 
   <EditText
-      android:layout_width="fill_parent"
-      android:layout_height="460dp"
+      android:layout_width="match_parent"
+      android:layout_height="100dp"
       android:inputType="textMultiLine"
       android:ems="10"
       android:id="@+id/edit_message"
-      android:textAlignment="viewStart"
-      android:typeface="serif"
+      android:typeface="normal"
       android:width="@dimen/activity_horizontal_margin"
       android:autoText="true"
-      android:layout_weight="1"/>
+      android:layout_toLeftOf="@+id/button"
+      android:capitalize="sentences"
+      android:editable="true"
+      android:textIsSelectable="true"
+      android:hint="How's your day going?"
+      android:focusable="true"
+      android:gravity="top"/>
 
   <Button
-      android:layout_width="fill_parent"
-      android:layout_height="50dp"
+      android:layout_width="70dp"
+      android:layout_height="100dp"
       android:text="@string/button_text"
       android:id="@+id/button"
-      android:layout_weight="1"
-      android:onClick="saveMessage"/>
-</LinearLayout>
+      android:onClick="saveMessage"
+      android:layout_alignParentTop="true"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentEnd="true"/>
+</RelativeLayout>

@@ -11,7 +11,8 @@
       android:layout_margin="10dp"
       android:text="@string/ellipsis"
       android:textColor="#080813"
-      android:textSize="15sp"/>
+      android:textSize="15sp"
+      android:autoLink="phone|email|web"/>
 
   <TextView
       android:id="@+id/date"
