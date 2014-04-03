@@ -9,10 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class SnippetList extends FragmentActivity {

@@ -2,12 +2,10 @@ package org.devcloud.snippets.app;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DataSetObserver;
 import android.view.LayoutInflater;
-import android.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.CursorAdapter;
 import android.widget.TextView;
 
 class SnippetListCursorAdapter extends CursorAdapter {
@@ -54,10 +52,10 @@ class SnippetListCursorAdapter extends CursorAdapter {
    */
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
-    TextView list_item_text = (TextView)view.findViewById(R.id.list_text);
+    TextView list_item_text = (TextView) view.findViewById(R.id.list_text);
     list_item_text.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_TEXT)));
 
-    TextView list_item_date = (TextView)view.findViewById(R.id.date);
+    TextView list_item_date = (TextView) view.findViewById(R.id.date);
     list_item_date.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_DATE)));
   }
 

@@ -20,7 +20,7 @@ package com.google.cloud.backend.android.mobilebackend.model;
 
 /**
  * Model definition for Filter.
- *
+ * <p/>
  * <p> This is the Java data model class that specifies how to parse/serialize into the JSON that is
  * transmitted over HTTP when working with the mobilebackend. For a detailed explanation see:
  * <a href="http://code.google.com/p/google-http-java-client/wiki/JSON">http://code.google.com/p/google-http-java-client/wiki/JSON</a>

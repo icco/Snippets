@@ -1,9 +1,9 @@
 <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_alignParentTop="true"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/linearLayout"
     android:orientation="vertical">
 
@@ -25,5 +25,5 @@
       android:text="@string/button_text"
       android:id="@+id/button"
       android:layout_weight="1"
-      android:onClick="saveMessage" />
+      android:onClick="saveMessage"/>
 </LinearLayout>

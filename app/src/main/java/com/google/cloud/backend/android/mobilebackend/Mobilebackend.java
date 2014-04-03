@@ -20,23 +20,23 @@ package com.google.cloud.backend.android.mobilebackend;
 
 /**
  * Service definition for Mobilebackend (v1).
- *
+ * <p/>
  * <p>
  * This is an API
  * </p>
- *
+ * <p/>
  * <p>
  * For more information about this service, see the
  * <a href="" target="_blank">API Documentation</a>
  * </p>
- *
+ * <p/>
  * <p>
  * This service uses {@link MobilebackendRequestInitializer} to initialize global parameters via its
  * {@link Builder}.
  * </p>
  *
- * @since 1.3
  * @author Google, Inc.
+ * @since 1.3
  */
 @SuppressWarnings("javadoc")
 public class Mobilebackend extends com.google.api.client.googleapis.services.json.AbstractGoogleJsonClient {
@@ -45,10 +45,11 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
   static {
     com.google.api.client.util.Preconditions.checkState(
         com.google.api.client.googleapis.GoogleUtils.MAJOR_VERSION == 1 &&
-        com.google.api.client.googleapis.GoogleUtils.MINOR_VERSION >= 15,
+            com.google.api.client.googleapis.GoogleUtils.MINOR_VERSION >= 15,
         "You are currently running with version %s of google-api-client. " +
-        "You need at least version 1.15 of google-api-client to run version " +
-        "1.15.0-rc of the mobilebackend library.", com.google.api.client.googleapis.GoogleUtils.VERSION);
+            "You need at least version 1.15 of google-api-client to run version " +
+            "1.15.0-rc of the mobilebackend library.", com.google.api.client.googleapis.GoogleUtils.VERSION
+    );
   }
 
   /**
@@ -75,32 +76,32 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
 
   /**
    * Constructor.
-   *
+   * <p/>
    * <p>
    * Use {@link Builder} if you need to specify any of the optional parameters.
    * </p>
    *
-   * @param transport HTTP transport, which should normally be:
-   *        <ul>
-   *        <li>Google App Engine:
-   *        {@code com.google.api.client.extensions.appengine.http.UrlFetchTransport}</li>
-   *        <li>Android: {@code newCompatibleTransport} from
-   *        {@code com.google.api.client.extensions.android.http.AndroidHttp}</li>
-   *        <li>Java: {@link com.google.api.client.googleapis.javanet.GoogleNetHttpTransport#newTrustedTransport()}
-   *        </li>
-   *        </ul>
-   * @param jsonFactory JSON factory, which may be:
-   *        <ul>
-   *        <li>Jackson: {@code com.google.api.client.json.jackson2.JacksonFactory}</li>
-   *        <li>Google GSON: {@code com.google.api.client.json.gson.GsonFactory}</li>
-   *        <li>Android Honeycomb or higher:
-   *        {@code com.google.api.client.extensions.android.json.AndroidJsonFactory}</li>
-   *        </ul>
+   * @param transport              HTTP transport, which should normally be:
+   *                               <ul>
+   *                               <li>Google App Engine:
+   *                               {@code com.google.api.client.extensions.appengine.http.UrlFetchTransport}</li>
+   *                               <li>Android: {@code newCompatibleTransport} from
+   *                               {@code com.google.api.client.extensions.android.http.AndroidHttp}</li>
+   *                               <li>Java: {@link com.google.api.client.googleapis.javanet.GoogleNetHttpTransport#newTrustedTransport()}
+   *                               </li>
+   *                               </ul>
+   * @param jsonFactory            JSON factory, which may be:
+   *                               <ul>
+   *                               <li>Jackson: {@code com.google.api.client.json.jackson2.JacksonFactory}</li>
+   *                               <li>Google GSON: {@code com.google.api.client.json.gson.GsonFactory}</li>
+   *                               <li>Android Honeycomb or higher:
+   *                               {@code com.google.api.client.extensions.android.json.AndroidJsonFactory}</li>
+   *                               </ul>
    * @param httpRequestInitializer HTTP request initializer or {@code null} for none
    * @since 1.7
    */
   public Mobilebackend(com.google.api.client.http.HttpTransport transport, com.google.api.client.json.JsonFactory jsonFactory,
-      com.google.api.client.http.HttpRequestInitializer httpRequestInitializer) {
+                       com.google.api.client.http.HttpRequestInitializer httpRequestInitializer) {
     this(new Builder(transport, jsonFactory, httpRequestInitializer));
   }
 
@@ -118,7 +119,7 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
 
   /**
    * An accessor for creating requests from the BlobEndpoint collection.
-   *
+   * <p/>
    * <p>The typical use is:</p>
    * <pre>
    *   {@code Mobilebackend mobilebackend = new Mobilebackend(...);}
@@ -132,13 +133,132 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
   }
 
   /**
+   * An accessor for creating requests from the EndpointV1 collection.
+   * <p/>
+   * <p>The typical use is:</p>
+   * <pre>
+   *   {@code Mobilebackend mobilebackend = new Mobilebackend(...);}
+   *   {@code Mobilebackend.EndpointV1.List request = mobilebackend.endpointV1().list(parameters ...)}
+   * </pre>
+   *
+   * @return the resource collection
+   */
+  public EndpointV1 endpointV1() {
+    return new EndpointV1();
+  }
+
+  /**
+   * Builder for {@link Mobilebackend}.
+   * <p/>
+   * <p>
+   * Implementation is not thread-safe.
+   * </p>
+   *
+   * @since 1.3.0
+   */
+  public static final class Builder extends com.google.api.client.googleapis.services.json.AbstractGoogleJsonClient.Builder {
+
+    /**
+     * Returns an instance of a new builder.
+     *
+     * @param transport              HTTP transport, which should normally be:
+     *                               <ul>
+     *                               <li>Google App Engine:
+     *                               {@code com.google.api.client.extensions.appengine.http.UrlFetchTransport}</li>
+     *                               <li>Android: {@code newCompatibleTransport} from
+     *                               {@code com.google.api.client.extensions.android.http.AndroidHttp}</li>
+     *                               <li>Java: {@link com.google.api.client.googleapis.javanet.GoogleNetHttpTransport#newTrustedTransport()}
+     *                               </li>
+     *                               </ul>
+     * @param jsonFactory            JSON factory, which may be:
+     *                               <ul>
+     *                               <li>Jackson: {@code com.google.api.client.json.jackson2.JacksonFactory}</li>
+     *                               <li>Google GSON: {@code com.google.api.client.json.gson.GsonFactory}</li>
+     *                               <li>Android Honeycomb or higher:
+     *                               {@code com.google.api.client.extensions.android.json.AndroidJsonFactory}</li>
+     *                               </ul>
+     * @param httpRequestInitializer HTTP request initializer or {@code null} for none
+     * @since 1.7
+     */
+    public Builder(com.google.api.client.http.HttpTransport transport, com.google.api.client.json.JsonFactory jsonFactory,
+                   com.google.api.client.http.HttpRequestInitializer httpRequestInitializer) {
+      super(
+          transport,
+          jsonFactory,
+          DEFAULT_ROOT_URL,
+          DEFAULT_SERVICE_PATH,
+          httpRequestInitializer,
+          false);
+    }
+
+    /**
+     * Builds a new instance of {@link Mobilebackend}.
+     */
+    @Override
+    public Mobilebackend build() {
+      return new Mobilebackend(this);
+    }
+
+    @Override
+    public Builder setRootUrl(String rootUrl) {
+      return (Builder) super.setRootUrl(rootUrl);
+    }
+
+    @Override
+    public Builder setServicePath(String servicePath) {
+      return (Builder) super.setServicePath(servicePath);
+    }
+
+    @Override
+    public Builder setHttpRequestInitializer(com.google.api.client.http.HttpRequestInitializer httpRequestInitializer) {
+      return (Builder) super.setHttpRequestInitializer(httpRequestInitializer);
+    }
+
+    @Override
+    public Builder setApplicationName(String applicationName) {
+      return (Builder) super.setApplicationName(applicationName);
+    }
+
+    @Override
+    public Builder setSuppressPatternChecks(boolean suppressPatternChecks) {
+      return (Builder) super.setSuppressPatternChecks(suppressPatternChecks);
+    }
+
+    @Override
+    public Builder setSuppressRequiredParameterChecks(boolean suppressRequiredParameterChecks) {
+      return (Builder) super.setSuppressRequiredParameterChecks(suppressRequiredParameterChecks);
+    }
+
+    @Override
+    public Builder setSuppressAllChecks(boolean suppressAllChecks) {
+      return (Builder) super.setSuppressAllChecks(suppressAllChecks);
+    }
+
+    /**
+     * Set the {@link MobilebackendRequestInitializer}.
+     *
+     * @since 1.12
+     */
+    public Builder setMobilebackendRequestInitializer(
+        MobilebackendRequestInitializer mobilebackendRequestInitializer) {
+      return (Builder) super.setGoogleClientRequestInitializer(mobilebackendRequestInitializer);
+    }
+
+    @Override
+    public Builder setGoogleClientRequestInitializer(
+        com.google.api.client.googleapis.services.GoogleClientRequestInitializer googleClientRequestInitializer) {
+      return (Builder) super.setGoogleClientRequestInitializer(googleClientRequestInitializer);
+    }
+  }
+
+  /**
    * The "blobEndpoint" collection of methods.
    */
   public class BlobEndpoint {
 
     /**
      * Create a request for the method "blobEndpoint.deleteBlob".
-     *
+     * <p/>
      * This request holds the parameters needed by the the mobilebackend server.  After setting any
      * optional parameters, call the {@link DeleteBlob#execute()} method to invoke the remote operation.
      *
@@ -152,13 +272,52 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
       return result;
     }
 
+    /**
+     * Create a request for the method "blobEndpoint.getDownloadUrl".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link GetDownloadUrl#execute()} method to invoke the remote
+     * operation.
+     *
+     * @param bucketName
+     * @param objectPath
+     * @return the request
+     */
+    public GetDownloadUrl getDownloadUrl(java.lang.String bucketName, java.lang.String objectPath) throws java.io.IOException {
+      GetDownloadUrl result = new GetDownloadUrl(bucketName, objectPath);
+      initialize(result);
+      return result;
+    }
+
+    /**
+     * Create a request for the method "blobEndpoint.getUploadUrl".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link GetUploadUrl#execute()} method to invoke the remote
+     * operation.
+     *
+     * @param bucketName
+     * @param objectPath
+     * @param accessMode
+     * @return the request
+     */
+    public GetUploadUrl getUploadUrl(java.lang.String bucketName, java.lang.String objectPath, java.lang.String accessMode) throws java.io.IOException {
+      GetUploadUrl result = new GetUploadUrl(bucketName, objectPath, accessMode);
+      initialize(result);
+      return result;
+    }
+
     public class DeleteBlob extends MobilebackendRequest<Void> {
 
       private static final String REST_PATH = "blobs/{bucketName}/{objectPath}";
+      @com.google.api.client.util.Key
+      private java.lang.String bucketName;
+      @com.google.api.client.util.Key
+      private java.lang.String objectPath;
 
       /**
        * Create a request for the method "blobEndpoint.deleteBlob".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link DeleteBlob#execute()} method to invoke the remote
        * operation. <p> {@link
@@ -210,9 +369,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (DeleteBlob) super.setUserIp(userIp);
       }
 
-      @com.google.api.client.util.Key
-      private java.lang.String bucketName;
-
       /**
 
        */
@@ -224,9 +380,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         this.bucketName = bucketName;
         return this;
       }
-
-      @com.google.api.client.util.Key
-      private java.lang.String objectPath;
 
       /**
 
@@ -245,30 +398,18 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (DeleteBlob) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "blobEndpoint.getDownloadUrl".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link GetDownloadUrl#execute()} method to invoke the remote
-     * operation.
-     *
-     * @param bucketName
-     * @param objectPath
-     * @return the request
-     */
-    public GetDownloadUrl getDownloadUrl(java.lang.String bucketName, java.lang.String objectPath) throws java.io.IOException {
-      GetDownloadUrl result = new GetDownloadUrl(bucketName, objectPath);
-      initialize(result);
-      return result;
-    }
 
     public class GetDownloadUrl extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.BlobAccess> {
 
       private static final String REST_PATH = "blobs/downloads/{bucketName}/{objectPath}";
+      @com.google.api.client.util.Key
+      private java.lang.String bucketName;
+      @com.google.api.client.util.Key
+      private java.lang.String objectPath;
 
       /**
        * Create a request for the method "blobEndpoint.getDownloadUrl".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link GetDownloadUrl#execute()} method to invoke the remote
        * operation. <p> {@link GetDownloadUrl#initialize(com.google.api.client.googleapis.services.Abstr
@@ -330,9 +471,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (GetDownloadUrl) super.setUserIp(userIp);
       }
 
-      @com.google.api.client.util.Key
-      private java.lang.String bucketName;
-
       /**
 
        */
@@ -344,9 +482,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         this.bucketName = bucketName;
         return this;
       }
-
-      @com.google.api.client.util.Key
-      private java.lang.String objectPath;
 
       /**
 
@@ -365,31 +500,22 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (GetDownloadUrl) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "blobEndpoint.getUploadUrl".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link GetUploadUrl#execute()} method to invoke the remote
-     * operation.
-     *
-     * @param bucketName
-     * @param objectPath
-     * @param accessMode
-     * @return the request
-     */
-    public GetUploadUrl getUploadUrl(java.lang.String bucketName, java.lang.String objectPath, java.lang.String accessMode) throws java.io.IOException {
-      GetUploadUrl result = new GetUploadUrl(bucketName, objectPath, accessMode);
-      initialize(result);
-      return result;
-    }
 
     public class GetUploadUrl extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.BlobAccess> {
 
       private static final String REST_PATH = "blobs/uploads/{bucketName}/{objectPath}";
+      @com.google.api.client.util.Key
+      private java.lang.String bucketName;
+      @com.google.api.client.util.Key
+      private java.lang.String objectPath;
+      @com.google.api.client.util.Key
+      private java.lang.String accessMode;
+      @com.google.api.client.util.Key
+      private java.lang.String contentType;
 
       /**
        * Create a request for the method "blobEndpoint.getUploadUrl".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link GetUploadUrl#execute()} method to invoke the remote
        * operation. <p> {@link
@@ -453,9 +579,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (GetUploadUrl) super.setUserIp(userIp);
       }
 
-      @com.google.api.client.util.Key
-      private java.lang.String bucketName;
-
       /**
 
        */
@@ -467,9 +590,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         this.bucketName = bucketName;
         return this;
       }
-
-      @com.google.api.client.util.Key
-      private java.lang.String objectPath;
 
       /**
 
@@ -483,9 +603,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return this;
       }
 
-      @com.google.api.client.util.Key
-      private java.lang.String accessMode;
-
       /**
 
        */
@@ -497,9 +614,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         this.accessMode = accessMode;
         return this;
       }
-
-      @com.google.api.client.util.Key
-      private java.lang.String contentType;
 
       /**
 
@@ -522,28 +636,13 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
   }
 
   /**
-   * An accessor for creating requests from the EndpointV1 collection.
-   *
-   * <p>The typical use is:</p>
-   * <pre>
-   *   {@code Mobilebackend mobilebackend = new Mobilebackend(...);}
-   *   {@code Mobilebackend.EndpointV1.List request = mobilebackend.endpointV1().list(parameters ...)}
-   * </pre>
-   *
-   * @return the resource collection
-   */
-  public EndpointV1 endpointV1() {
-    return new EndpointV1();
-  }
-
-  /**
    * The "endpointV1" collection of methods.
    */
   public class EndpointV1 {
 
     /**
      * Create a request for the method "endpointV1.delete".
-     *
+     * <p/>
      * This request holds the parameters needed by the the mobilebackend server.  After setting any
      * optional parameters, call the {@link Delete#execute()} method to invoke the remote operation.
      *
@@ -557,13 +656,157 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
       return result;
     }
 
+    /**
+     * Create a request for the method "endpointV1.deleteAll".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link DeleteAll#execute()} method to invoke the remote operation.
+     *
+     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityListDto}
+     * @return the request
+     */
+    public DeleteAll deleteAll(com.google.cloud.backend.android.mobilebackend.model.EntityListDto content) throws java.io.IOException {
+      DeleteAll result = new DeleteAll(content);
+      initialize(result);
+      return result;
+    }
+
+    /**
+     * Create a request for the method "endpointV1.get".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link Get#execute()} method to invoke the remote operation.
+     *
+     * @param kind
+     * @param id
+     * @return the request
+     */
+    public Get get(java.lang.String kind, java.lang.String id) throws java.io.IOException {
+      Get result = new Get(kind, id);
+      initialize(result);
+      return result;
+    }
+
+    /**
+     * Create a request for the method "endpointV1.getAll".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link GetAll#execute()} method to invoke the remote operation.
+     *
+     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityListDto}
+     * @return the request
+     */
+    public GetAll getAll(com.google.cloud.backend.android.mobilebackend.model.EntityListDto content) throws java.io.IOException {
+      GetAll result = new GetAll(content);
+      initialize(result);
+      return result;
+    }
+
+    /**
+     * Create a request for the method "endpointV1.insert".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link Insert#execute()} method to invoke the remote operation.
+     *
+     * @param kind
+     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityDto}
+     * @return the request
+     */
+    public Insert insert(java.lang.String kind, com.google.cloud.backend.android.mobilebackend.model.EntityDto content) throws java.io.IOException {
+      Insert result = new Insert(kind, content);
+      initialize(result);
+      return result;
+    }
+
+    /**
+     * Create a request for the method "endpointV1.insertAll".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link InsertAll#execute()} method to invoke the remote operation.
+     *
+     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityListDto}
+     * @return the request
+     */
+    public InsertAll insertAll(com.google.cloud.backend.android.mobilebackend.model.EntityListDto content) throws java.io.IOException {
+      InsertAll result = new InsertAll(content);
+      initialize(result);
+      return result;
+    }
+
+    /**
+     * Create a request for the method "endpointV1.list".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link List#execute()} method to invoke the remote operation.
+     *
+     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.QueryDto}
+     * @return the request
+     */
+    public List list(com.google.cloud.backend.android.mobilebackend.model.QueryDto content) throws java.io.IOException {
+      List result = new List(content);
+      initialize(result);
+      return result;
+    }
+
+    /**
+     * Create a request for the method "endpointV1.patch".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link Patch#execute()} method to invoke the remote operation.
+     *
+     * @param kind
+     * @param id
+     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityDto}
+     * @return the request
+     */
+    public Patch patch(java.lang.String kind, java.lang.String id, com.google.cloud.backend.android.mobilebackend.model.EntityDto content) throws java.io.IOException {
+      Patch result = new Patch(kind, id, content);
+      initialize(result);
+      return result;
+    }
+
+    /**
+     * Create a request for the method "endpointV1.update".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link Update#execute()} method to invoke the remote operation.
+     *
+     * @param kind
+     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityDto}
+     * @return the request
+     */
+    public Update update(java.lang.String kind, com.google.cloud.backend.android.mobilebackend.model.EntityDto content) throws java.io.IOException {
+      Update result = new Update(kind, content);
+      initialize(result);
+      return result;
+    }
+
+    /**
+     * Create a request for the method "endpointV1.updateAll".
+     * <p/>
+     * This request holds the parameters needed by the the mobilebackend server.  After setting any
+     * optional parameters, call the {@link UpdateAll#execute()} method to invoke the remote operation.
+     *
+     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityListDto}
+     * @return the request
+     */
+    public UpdateAll updateAll(com.google.cloud.backend.android.mobilebackend.model.EntityListDto content) throws java.io.IOException {
+      UpdateAll result = new UpdateAll(content);
+      initialize(result);
+      return result;
+    }
+
     public class Delete extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityDto> {
 
       private static final String REST_PATH = "CloudEntities/{kind}/{id}";
+      @com.google.api.client.util.Key
+      private java.lang.String kind;
+      @com.google.api.client.util.Key
+      private java.lang.String id;
 
       /**
        * Create a request for the method "endpointV1.delete".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link Delete#execute()} method to invoke the remote operation.
        * <p> {@link
@@ -615,9 +858,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Delete) super.setUserIp(userIp);
       }
 
-      @com.google.api.client.util.Key
-      private java.lang.String kind;
-
       /**
 
        */
@@ -629,9 +869,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         this.kind = kind;
         return this;
       }
-
-      @com.google.api.client.util.Key
-      private java.lang.String id;
 
       /**
 
@@ -650,20 +887,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Delete) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "endpointV1.deleteAll".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link DeleteAll#execute()} method to invoke the remote operation.
-     *
-     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityListDto}
-     * @return the request
-     */
-    public DeleteAll deleteAll(com.google.cloud.backend.android.mobilebackend.model.EntityListDto content) throws java.io.IOException {
-      DeleteAll result = new DeleteAll(content);
-      initialize(result);
-      return result;
-    }
 
     public class DeleteAll extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityListDto> {
 
@@ -671,7 +894,7 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
 
       /**
        * Create a request for the method "endpointV1.deleteAll".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link DeleteAll#execute()} method to invoke the remote
        * operation. <p> {@link
@@ -725,29 +948,18 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (DeleteAll) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "endpointV1.get".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link Get#execute()} method to invoke the remote operation.
-     *
-     * @param kind
-     * @param id
-     * @return the request
-     */
-    public Get get(java.lang.String kind, java.lang.String id) throws java.io.IOException {
-      Get result = new Get(kind, id);
-      initialize(result);
-      return result;
-    }
 
     public class Get extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityDto> {
 
       private static final String REST_PATH = "CloudEntities/{kind}/{id}";
+      @com.google.api.client.util.Key
+      private java.lang.String kind;
+      @com.google.api.client.util.Key
+      private java.lang.String id;
 
       /**
        * Create a request for the method "endpointV1.get".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link Get#execute()} method to invoke the remote operation. <p>
        * {@link Get#initialize(com.google.api.client.googleapis.services.AbstractGoogleClientRequest)}
@@ -808,9 +1020,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Get) super.setUserIp(userIp);
       }
 
-      @com.google.api.client.util.Key
-      private java.lang.String kind;
-
       /**
 
        */
@@ -822,9 +1031,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         this.kind = kind;
         return this;
       }
-
-      @com.google.api.client.util.Key
-      private java.lang.String id;
 
       /**
 
@@ -843,20 +1049,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Get) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "endpointV1.getAll".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link GetAll#execute()} method to invoke the remote operation.
-     *
-     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityListDto}
-     * @return the request
-     */
-    public GetAll getAll(com.google.cloud.backend.android.mobilebackend.model.EntityListDto content) throws java.io.IOException {
-      GetAll result = new GetAll(content);
-      initialize(result);
-      return result;
-    }
 
     public class GetAll extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityListDto> {
 
@@ -864,7 +1056,7 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
 
       /**
        * Create a request for the method "endpointV1.getAll".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link GetAll#execute()} method to invoke the remote operation.
        * <p> {@link
@@ -918,29 +1110,16 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (GetAll) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "endpointV1.insert".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link Insert#execute()} method to invoke the remote operation.
-     *
-     * @param kind
-     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityDto}
-     * @return the request
-     */
-    public Insert insert(java.lang.String kind, com.google.cloud.backend.android.mobilebackend.model.EntityDto content) throws java.io.IOException {
-      Insert result = new Insert(kind, content);
-      initialize(result);
-      return result;
-    }
 
     public class Insert extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityDto> {
 
       private static final String REST_PATH = "CloudEntities/insert/{kind}";
+      @com.google.api.client.util.Key
+      private java.lang.String kind;
 
       /**
        * Create a request for the method "endpointV1.insert".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link Insert#execute()} method to invoke the remote operation.
        * <p> {@link
@@ -991,9 +1170,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Insert) super.setUserIp(userIp);
       }
 
-      @com.google.api.client.util.Key
-      private java.lang.String kind;
-
       /**
 
        */
@@ -1011,20 +1187,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Insert) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "endpointV1.insertAll".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link InsertAll#execute()} method to invoke the remote operation.
-     *
-     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityListDto}
-     * @return the request
-     */
-    public InsertAll insertAll(com.google.cloud.backend.android.mobilebackend.model.EntityListDto content) throws java.io.IOException {
-      InsertAll result = new InsertAll(content);
-      initialize(result);
-      return result;
-    }
 
     public class InsertAll extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityListDto> {
 
@@ -1032,7 +1194,7 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
 
       /**
        * Create a request for the method "endpointV1.insertAll".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link InsertAll#execute()} method to invoke the remote
        * operation. <p> {@link
@@ -1086,20 +1248,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (InsertAll) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "endpointV1.list".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link List#execute()} method to invoke the remote operation.
-     *
-     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.QueryDto}
-     * @return the request
-     */
-    public List list(com.google.cloud.backend.android.mobilebackend.model.QueryDto content) throws java.io.IOException {
-      List result = new List(content);
-      initialize(result);
-      return result;
-    }
 
     public class List extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityListDto> {
 
@@ -1107,7 +1255,7 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
 
       /**
        * Create a request for the method "endpointV1.list".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link List#execute()} method to invoke the remote operation. <p>
        * {@link List#initialize(com.google.api.client.googleapis.services.AbstractGoogleClientRequest)}
@@ -1160,30 +1308,18 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (List) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "endpointV1.patch".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link Patch#execute()} method to invoke the remote operation.
-     *
-     * @param kind
-     * @param id
-     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityDto}
-     * @return the request
-     */
-    public Patch patch(java.lang.String kind, java.lang.String id, com.google.cloud.backend.android.mobilebackend.model.EntityDto content) throws java.io.IOException {
-      Patch result = new Patch(kind, id, content);
-      initialize(result);
-      return result;
-    }
 
     public class Patch extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityDto> {
 
       private static final String REST_PATH = "CloudEntities/update/{kind}";
+      @com.google.api.client.util.Key
+      private java.lang.String kind;
+      @com.google.api.client.util.Key
+      private java.lang.String id;
 
       /**
        * Create a request for the method "endpointV1.patch".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link Patch#execute()} method to invoke the remote operation.
        * <p> {@link
@@ -1236,9 +1372,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Patch) super.setUserIp(userIp);
       }
 
-      @com.google.api.client.util.Key
-      private java.lang.String kind;
-
       /**
 
        */
@@ -1250,9 +1383,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         this.kind = kind;
         return this;
       }
-
-      @com.google.api.client.util.Key
-      private java.lang.String id;
 
       /**
 
@@ -1271,29 +1401,16 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Patch) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "endpointV1.update".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link Update#execute()} method to invoke the remote operation.
-     *
-     * @param kind
-     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityDto}
-     * @return the request
-     */
-    public Update update(java.lang.String kind, com.google.cloud.backend.android.mobilebackend.model.EntityDto content) throws java.io.IOException {
-      Update result = new Update(kind, content);
-      initialize(result);
-      return result;
-    }
 
     public class Update extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityDto> {
 
       private static final String REST_PATH = "CloudEntities/update/{kind}";
+      @com.google.api.client.util.Key
+      private java.lang.String kind;
 
       /**
        * Create a request for the method "endpointV1.update".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link Update#execute()} method to invoke the remote operation.
        * <p> {@link
@@ -1344,9 +1461,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Update) super.setUserIp(userIp);
       }
 
-      @com.google.api.client.util.Key
-      private java.lang.String kind;
-
       /**
 
        */
@@ -1364,20 +1478,6 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
         return (Update) super.set(parameterName, value);
       }
     }
-    /**
-     * Create a request for the method "endpointV1.updateAll".
-     *
-     * This request holds the parameters needed by the the mobilebackend server.  After setting any
-     * optional parameters, call the {@link UpdateAll#execute()} method to invoke the remote operation.
-     *
-     * @param content the {@link com.google.cloud.backend.android.mobilebackend.model.EntityListDto}
-     * @return the request
-     */
-    public UpdateAll updateAll(com.google.cloud.backend.android.mobilebackend.model.EntityListDto content) throws java.io.IOException {
-      UpdateAll result = new UpdateAll(content);
-      initialize(result);
-      return result;
-    }
 
     public class UpdateAll extends MobilebackendRequest<com.google.cloud.backend.android.mobilebackend.model.EntityListDto> {
 
@@ -1385,7 +1485,7 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
 
       /**
        * Create a request for the method "endpointV1.updateAll".
-       *
+       * <p/>
        * This request holds the parameters needed by the the mobilebackend server.  After setting any
        * optional parameters, call the {@link UpdateAll#execute()} method to invoke the remote
        * operation. <p> {@link
@@ -1440,107 +1540,5 @@ public class Mobilebackend extends com.google.api.client.googleapis.services.jso
       }
     }
 
-  }
-
-  /**
-   * Builder for {@link Mobilebackend}.
-   *
-   * <p>
-   * Implementation is not thread-safe.
-   * </p>
-   *
-   * @since 1.3.0
-   */
-  public static final class Builder extends com.google.api.client.googleapis.services.json.AbstractGoogleJsonClient.Builder {
-
-    /**
-     * Returns an instance of a new builder.
-     *
-     * @param transport HTTP transport, which should normally be:
-     *        <ul>
-     *        <li>Google App Engine:
-     *        {@code com.google.api.client.extensions.appengine.http.UrlFetchTransport}</li>
-     *        <li>Android: {@code newCompatibleTransport} from
-     *        {@code com.google.api.client.extensions.android.http.AndroidHttp}</li>
-     *        <li>Java: {@link com.google.api.client.googleapis.javanet.GoogleNetHttpTransport#newTrustedTransport()}
-     *        </li>
-     *        </ul>
-     * @param jsonFactory JSON factory, which may be:
-     *        <ul>
-     *        <li>Jackson: {@code com.google.api.client.json.jackson2.JacksonFactory}</li>
-     *        <li>Google GSON: {@code com.google.api.client.json.gson.GsonFactory}</li>
-     *        <li>Android Honeycomb or higher:
-     *        {@code com.google.api.client.extensions.android.json.AndroidJsonFactory}</li>
-     *        </ul>
-     * @param httpRequestInitializer HTTP request initializer or {@code null} for none
-     * @since 1.7
-     */
-    public Builder(com.google.api.client.http.HttpTransport transport, com.google.api.client.json.JsonFactory jsonFactory,
-        com.google.api.client.http.HttpRequestInitializer httpRequestInitializer) {
-      super(
-          transport,
-          jsonFactory,
-          DEFAULT_ROOT_URL,
-          DEFAULT_SERVICE_PATH,
-          httpRequestInitializer,
-          false);
-    }
-
-    /** Builds a new instance of {@link Mobilebackend}. */
-    @Override
-    public Mobilebackend build() {
-      return new Mobilebackend(this);
-    }
-
-    @Override
-    public Builder setRootUrl(String rootUrl) {
-      return (Builder) super.setRootUrl(rootUrl);
-    }
-
-    @Override
-    public Builder setServicePath(String servicePath) {
-      return (Builder) super.setServicePath(servicePath);
-    }
-
-    @Override
-    public Builder setHttpRequestInitializer(com.google.api.client.http.HttpRequestInitializer httpRequestInitializer) {
-      return (Builder) super.setHttpRequestInitializer(httpRequestInitializer);
-    }
-
-    @Override
-    public Builder setApplicationName(String applicationName) {
-      return (Builder) super.setApplicationName(applicationName);
-    }
-
-    @Override
-    public Builder setSuppressPatternChecks(boolean suppressPatternChecks) {
-      return (Builder) super.setSuppressPatternChecks(suppressPatternChecks);
-    }
-
-    @Override
-    public Builder setSuppressRequiredParameterChecks(boolean suppressRequiredParameterChecks) {
-      return (Builder) super.setSuppressRequiredParameterChecks(suppressRequiredParameterChecks);
-    }
-
-    @Override
-    public Builder setSuppressAllChecks(boolean suppressAllChecks) {
-      return (Builder) super.setSuppressAllChecks(suppressAllChecks);
-    }
-
-    /**
-     * Set the {@link MobilebackendRequestInitializer}.
-     *
-     * @since 1.12
-     */
-    public Builder setMobilebackendRequestInitializer(
-        MobilebackendRequestInitializer mobilebackendRequestInitializer) {
-      return (Builder) super.setGoogleClientRequestInitializer(mobilebackendRequestInitializer);
-    }
-
-    @Override
-    public Builder setGoogleClientRequestInitializer(
-        com.google.api.client.googleapis.services.GoogleClientRequestInitializer googleClientRequestInitializer) {
-      return (Builder) super.setGoogleClientRequestInitializer(googleClientRequestInitializer);
-    }
   }
 }
