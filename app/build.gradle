@@ -18,9 +18,9 @@ android {
 
     release {
       storeFile file(System.getenv("ANDROID_KEYSTORE"))
-      storePassword System.console().readLine("\n\$ Enter keystore password: ")
       keyAlias "Snippets"
-      keyPassword System.console().readLine("\n\$ Enter key password: ")
+      storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+      keyPassword System.getenv("SNIPPETS_KEYSTORE_KEY_PASSWORD")
     }
   }
 
