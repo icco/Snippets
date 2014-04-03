@@ -65,10 +65,11 @@ public class SnippetList extends FragmentActivity {
       View rootView = inflater.inflate(R.layout.fragment_snippet_list, container, false);
 
       try {
-        ArrayAdapter<Snippet> snippet_list;
-        ArrayList<Snippet> snippets = Snippet.loadAll(this.getActivity().getApplicationContext());
-
-        snippet_list = new ArrayAdapter<Snippet>(inflater.getContext(), android.R.layout.simple_list_item_1, snippets);
+        SnippetListCursorAdapter snippet_list;
+        snippet_list = new SnippetListCursorAdapter(
+            inflater.getContext(),
+            Snippet.getCursorForAll(inflater.getContext()),
+            true);
         setListAdapter(snippet_list);
       } catch (IOException e) {
         Log.e(TAG, "Problem loading data from DB.", e);

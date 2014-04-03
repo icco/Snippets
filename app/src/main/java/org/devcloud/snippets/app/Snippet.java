@@ -27,8 +27,7 @@ public class Snippet {
     this.setCreated(new Date());
   }
 
-  // TODO: Change this to this: https://developer.android.com/guide/topics/ui/layout/listview.html
-  public static ArrayList<Snippet> loadAll(Context context) throws IOException {
+  public static Cursor getCursorForAll(Context context) throws IOException {
     DatabaseHelper mDbHelper = new DatabaseHelper(context);
     ArrayList<Snippet> list = new ArrayList<Snippet>();
 
@@ -39,25 +38,11 @@ public class Snippet {
       throw new IOException("Database not readable.");
     }
 
-    String[] columns = {COLUMN_NAME_TEXT, COLUMN_NAME_DATE};
+    String[] columns = {"_id", COLUMN_NAME_TEXT, COLUMN_NAME_DATE};
     String[] empty = {};
     Cursor cursor = db.query(TABLE_NAME, columns, "", empty, "", "", COLUMN_NAME_DATE);
 
-    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-      Snippet s = new Snippet(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_TEXT)));
-      String date = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE));
-
-      try {
-        s.setCreated(DatabaseHelper.parseDate(date));
-        list.add(s);
-        Log.d(TAG, "Loaded an entry");
-      } catch (ParseException e) {
-        Log.e(TAG, "Couldn't parse date.", e);
-        continue;
-      }
-    }
-
-    return list;
+    return cursor;
   }
 
   public String toString() {

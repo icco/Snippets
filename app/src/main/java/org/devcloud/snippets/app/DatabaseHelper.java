@@ -12,8 +12,8 @@ import java.util.Locale;
 class DatabaseHelper extends SQLiteOpenHelper {
 
   // If you change the database schema, you must increment the database version.
-  public static final int DATABASE_VERSION = 1;
-  public static final String DATABASE_NAME = "Highlight.db";
+  public static final int DATABASE_VERSION = 2;
+  public static final String DATABASE_NAME = "Snippets.db";
 
   public DatabaseHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,7 +34,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
   }
 
   public void onCreate(SQLiteDatabase db) {
-    db.execSQL("CREATE TABLE " + Snippet.TABLE_NAME + " (id INTEGER PRIMARY KEY," +
+    db.execSQL("CREATE TABLE " + Snippet.TABLE_NAME + " (_id INTEGER PRIMARY KEY," +
         Snippet.COLUMN_NAME_TEXT + " " + Snippet.COLUMN_TYPE_TEXT + " NOT NULL, " +
         Snippet.COLUMN_NAME_DATE + " " + Snippet.COLUMN_TYPE_DATE + " NOT NULL" +
         ")");
