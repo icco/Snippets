@@ -16,11 +16,13 @@ android {
       storeFile file("debug.keystore")
     }
 
-    release {
-      storeFile file(System.getenv("ANDROID_KEYSTORE"))
-      keyAlias "Snippets"
-      storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
-      keyPassword System.getenv("SNIPPETS_KEYSTORE_KEY_PASSWORD")
+    if (System.getenv("ANDROID_KEYSTORE_PASSWORD")) {
+      release {
+        storeFile file(System.getenv("ANDROID_KEYSTORE"))
+        keyAlias "Snippets"
+        storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+        keyPassword System.getenv("SNIPPETS_KEYSTORE_KEY_PASSWORD")
+      }
     }
   }
 
@@ -28,7 +30,11 @@ android {
     release {
       runProguard true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
-      signingConfig signingConfigs.release
+      if (System.getenv("ANDROID_KEYSTORE_PASSWORD")) {
+        signingConfig signingConfigs.release
+      } else {
+        signingConfig signingConfigs.debug
+      }
     }
   }
 }
