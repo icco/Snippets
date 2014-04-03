@@ -72,11 +72,10 @@ public class MainActivity extends Activity {
   /**
    * Beginning fragment for saving a comment.
    */
-  public class NewPostFragment extends Fragment {
+  public static class NewPostFragment extends Fragment {
 
 
-    public NewPostFragment() {
-    }
+    public NewPostFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
