@@ -54,10 +54,11 @@ Context context = getApplicationContext();
       Log.e(TAG, e.getMessage(), e);
     }
 
-    Intent intent = new Intent(context, MainActivity.class);
+    Intent intent = getIntent();
     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    context.startActivity(intent);
+    finish();
+    startActivity(intent);
   }
 
   @Override
