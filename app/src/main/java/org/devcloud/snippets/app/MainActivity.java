@@ -1,21 +1,19 @@
 package org.devcloud.snippets.app;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 import java.io.IOException;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
   private static final String TAG = "MainActivity";
 
@@ -24,7 +22,7 @@ public class MainActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     if (savedInstanceState == null) {
-      getFragmentManager().beginTransaction()
+      getSupportFragmentManager().beginTransaction()
           .add(R.id.container, new NewPostFragment())
           .add(R.id.container, new SnippetListFragment())
           .commit();

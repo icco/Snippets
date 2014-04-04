@@ -13,10 +13,9 @@ import java.io.IOException;
 /**
  * A placeholder fragment containing a simple view.
  */
-public static class SnippetListFragment extends ListFragment {
+public class SnippetListFragment extends ListFragment {
 
   static final String TAG = "SnippetListFragment";
-
 
   public SnippetListFragment() {
   }
