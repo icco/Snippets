@@ -26,6 +26,7 @@ public class MainActivity extends Activity {
     if (savedInstanceState == null) {
       getFragmentManager().beginTransaction()
           .add(R.id.container, new NewPostFragment())
+          .add(R.id.container, new SnippetListFragment())
           .commit();
     }
   }
@@ -67,21 +68,5 @@ public class MainActivity extends Activity {
       return true;
     }
     return super.onOptionsItemSelected(item);
-  }
-
-  /**
-   * Beginning fragment for saving a comment.
-   */
-  public static class NewPostFragment extends Fragment {
-
-    public NewPostFragment() {
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      View rootView = inflater.inflate(R.layout.fragment_post_snippet, container, false);
-      return rootView;
-    }
-
   }
 }

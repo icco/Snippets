@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 
 import java.io.IOException;
 
-
 public class SnippetList extends FragmentActivity {
 
   static final String TAG = "SnippetList";
@@ -50,29 +49,5 @@ public class SnippetList extends FragmentActivity {
     return super.onOptionsItemSelected(item);
   }
 
-  /**
-   * A placeholder fragment containing a simple view.
-   */
-  public static class SnippetListFragment extends ListFragment {
 
-    public SnippetListFragment() {
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-      View rootView = inflater.inflate(R.layout.fragment_snippet_list, container, false);
-
-      try {
-        SnippetListCursorAdapter snippet_list;
-        snippet_list = new SnippetListCursorAdapter(
-            inflater.getContext(),
-            Snippet.getCursorForAll(inflater.getContext()),
-            true);
-        setListAdapter(snippet_list);
-      } catch (IOException e) {
-        Log.e(TAG, "Problem loading data from DB.", e);
-      }
-      return rootView;
-    }
-  }
 }
