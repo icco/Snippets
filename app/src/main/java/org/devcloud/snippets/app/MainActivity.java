@@ -2,6 +2,7 @@ package org.devcloud.snippets.app;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -16,15 +17,25 @@ public class MainActivity extends FragmentActivity {
 
   private static final String TAG = "MainActivity";
 
+  private int post_fragment_id, list_fragment_id;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
     if (savedInstanceState == null) {
+
+      Fragment list_fragment = new SnippetListFragment();
+      Fragment post_fragment = new NewPostFragment();
+
       getSupportFragmentManager().beginTransaction()
-          .add(R.id.container, new NewPostFragment())
-          .add(R.id.container, new SnippetListFragment())
+          .add(R.id.container,post_fragment)
+          .add(R.id.container, list_fragment)
           .commit();
+
+      // Save IDs
+      list_fragment_id = list_fragment.getId();
+      post_fragment_id = post_fragment.getId();
     }
   }
 
@@ -42,8 +53,11 @@ public class MainActivity extends FragmentActivity {
       Log.e(TAG, e.getMessage(), e);
     }
 
-    Intent intent = new Intent(this, MainActivity.class);
-    startActivity(intent);
+    // Reload the list Fragment
+    //SnippetListFragment list = (SnippetListFragment) getSupportFragmentManager().findFragmentById(list_fragment_id);
+
+    finish();
+    startActivity(getIntent());
   }
 
   @Override
