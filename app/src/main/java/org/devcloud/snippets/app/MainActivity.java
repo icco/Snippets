@@ -29,7 +29,6 @@ public class MainActivity extends FragmentActivity {
     }
   }
 
-
   public void saveMessage(View view) {
 
     // Get the text.
@@ -44,7 +43,7 @@ public class MainActivity extends FragmentActivity {
       Log.e(TAG, e.getMessage(), e);
     }
 
-    Intent intent = new Intent(this, SnippetList.class);
+    Intent intent = new Intent(this, MainActivity.class);
     startActivity(intent);
   }
 
