@@ -24,7 +24,7 @@ public class NewPostFragment extends Fragment {
     return rootView;
   }
 
-  private void setNameAsEditable (View rowView, boolean setToEditable) {
+  private void setNameAsEditable(View rowView, boolean setToEditable) {
 
     EditText textView = (EditText) rowView
         .findViewById(R.id.edit_message);

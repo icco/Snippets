@@ -1,6 +1,5 @@
 package org.devcloud.snippets.app;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
