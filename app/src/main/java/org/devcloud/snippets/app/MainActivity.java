@@ -30,7 +30,7 @@ public class MainActivity extends FragmentActivity {
       Fragment post_fragment = new NewPostFragment();
 
       getSupportFragmentManager().beginTransaction()
-          .add(R.id.container,post_fragment)
+          .add(R.id.container, post_fragment)
           .add(R.id.container, list_fragment)
           .commit();
 
@@ -45,7 +45,8 @@ public class MainActivity extends FragmentActivity {
     // Get the text.
     EditText editText = (EditText) findViewById(R.id.edit_message);
     String message = editText.getText().toString();
-Context context = getApplicationContext();
+    Context context = getApplicationContext();
+
     try {
       // Save the text.
       Snippet snippet = new Snippet(message);
