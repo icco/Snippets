@@ -1,5 +1,6 @@
 package org.devcloud.snippets.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -44,20 +45,19 @@ public class MainActivity extends FragmentActivity {
     // Get the text.
     EditText editText = (EditText) findViewById(R.id.edit_message);
     String message = editText.getText().toString();
-
+Context context = getApplicationContext();
     try {
       // Save the text.
       Snippet snippet = new Snippet(message);
-      snippet.save(getApplicationContext());
+      snippet.save(context);
     } catch (IOException e) {
       Log.e(TAG, e.getMessage(), e);
     }
 
-    // Reload the list Fragment
-    //SnippetListFragment list = (SnippetListFragment) getSupportFragmentManager().findFragmentById(list_fragment_id);
-
-    finish();
-    startActivity(getIntent());
+    Intent intent = new Intent(context, MainActivity.class);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    context.startActivity(intent);
   }
 
   @Override
