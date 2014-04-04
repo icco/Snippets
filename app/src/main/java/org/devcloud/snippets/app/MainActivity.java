@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -42,6 +43,8 @@ public class MainActivity extends FragmentActivity {
 
   public void saveMessage(View view) {
 
+    SnippetListFragment list = (SnippetListFragment) getSupportFragmentManager().findFragmentById(list_fragment_id);
+
     // Get the text.
     EditText editText = (EditText) findViewById(R.id.edit_message);
 
@@ -50,14 +53,21 @@ public class MainActivity extends FragmentActivity {
 
     try {
       // Save the text.
-      Snippet snippet = new Snippet(message);
-      snippet.save(context);
+      if (!message.isEmpty()) {
+        Snippet snippet = new Snippet(message);
+        snippet.save(context);
+
+        // Reload view
+        editText.setText("");
+        list.refresh(context);
+      } else {
+        CharSequence text = "Snippets can not be empty.";
+        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+        toast.show();
+      }
     } catch (IOException e) {
       Log.e(TAG, e.getMessage(), e);
     }
-
-    editText.clearComposingText();
-
   }
 
   @Override

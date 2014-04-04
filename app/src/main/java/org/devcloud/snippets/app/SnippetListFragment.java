@@ -1,5 +1,7 @@
 package org.devcloud.snippets.app;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -34,5 +36,13 @@ public class SnippetListFragment extends ListFragment {
       Log.e(TAG, "Problem loading data from DB.", e);
     }
     return rootView;
+  }
+
+  public void refresh(Context context) throws IOException {
+    Cursor new_cursor, old_cursor ;
+    new_cursor = Snippet.getCursorForAll(context);
+    SnippetListCursorAdapter adapter = (SnippetListCursorAdapter) getListAdapter();
+    old_cursor = adapter.swapCursor(new_cursor);
+    old_cursor.close();
   }
 }

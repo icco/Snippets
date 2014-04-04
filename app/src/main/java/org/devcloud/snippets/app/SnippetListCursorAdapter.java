@@ -58,22 +58,4 @@ class SnippetListCursorAdapter extends CursorAdapter {
     TextView list_item_date = (TextView) view.findViewById(R.id.date);
     list_item_date.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_DATE)));
   }
-
-
-  /*
-
-    for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-      Snippet s = new Snippet(cursor.getString(cursor.getColumnIndex(COLUMN_NAME_TEXT)));
-      String date = cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DATE));
-
-      try {
-        s.setCreated(DatabaseHelper.parseDate(date));
-        list.add(s);
-        Log.d(TAG, "Loaded an entry");
-      } catch (ParseException e) {
-        Log.e(TAG, "Couldn't parse date.", e);
-        continue;
-      }
-    }
-   */
 }
