@@ -39,7 +39,7 @@ public class SnippetListFragment extends ListFragment {
   }
 
   public void refresh(Context context) throws IOException {
-    Cursor new_cursor, old_cursor ;
+    Cursor new_cursor, old_cursor;
     new_cursor = Snippet.getCursorForAll(context);
     SnippetListCursorAdapter adapter = (SnippetListCursorAdapter) getListAdapter();
     old_cursor = adapter.swapCursor(new_cursor);

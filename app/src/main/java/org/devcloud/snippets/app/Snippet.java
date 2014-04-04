@@ -38,7 +38,15 @@ public class Snippet {
 
     String[] columns = {"_id", COLUMN_NAME_TEXT, COLUMN_NAME_DATE};
     String[] empty = {};
-    Cursor cursor = db.query(TABLE_NAME, columns, "", empty, "", "", COLUMN_NAME_DATE);
+    Cursor cursor = db.query(
+        TABLE_NAME,
+        columns,
+        "",
+        empty
+        ,
+        "",
+        "",
+        COLUMN_NAME_DATE + " DESC");
 
     return cursor;
   }
