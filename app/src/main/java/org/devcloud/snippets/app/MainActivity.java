@@ -1,6 +1,8 @@
 package org.devcloud.snippets.app;
 
+import android.accounts.Account;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -10,6 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.android.gms.plus.Plus;
 
 import java.io.IOException;
 
@@ -23,20 +27,30 @@ public class MainActivity extends FragmentActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    if (savedInstanceState == null) {
 
-      Fragment list_fragment = new SnippetListFragment();
-      Fragment post_fragment = new NewPostFragment();
+    String account = Plus.AccountApi.getAccountName(Const.getApiClient(this));
 
-      getSupportFragmentManager().beginTransaction()
-          .add(R.id.container, post_fragment)
-          .add(R.id.container, list_fragment)
-          .commit();
+    if (account == null) {
+      Intent intent = new Intent();
+      intent.setClass(this, LoginActivity.class);
+      startActivity(intent);
+      finish();
+    } else {
+      setContentView(R.layout.activity_main);
+      if (savedInstanceState == null) {
 
-      // Save IDs
-      list_fragment_id = list_fragment.getId();
-      post_fragment_id = post_fragment.getId();
+        Fragment list_fragment = new SnippetListFragment();
+        Fragment post_fragment = new NewPostFragment();
+
+        getSupportFragmentManager().beginTransaction()
+            .add(R.id.container, post_fragment)
+            .add(R.id.container, list_fragment)
+            .commit();
+
+        // Save IDs
+        list_fragment_id = list_fragment.getId();
+        post_fragment_id = post_fragment.getId();
+      }
     }
   }
 
