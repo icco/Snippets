@@ -4,6 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import com.google.android.gms.plus.model.people.Person;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,10 +22,15 @@ public class Snippet {
   private static final String TAG = "Snippet";
   private String text;
   private Date created;
+  private String personId;
 
-  public Snippet(String msg) {
+  public Snippet(String msg, Person person) {
     this.setText(msg);
     this.setCreated(new Date());
+    if (person != null) {
+      this.setPersonId(person.getId());
+    }
+    Log.i(TAG, "Snippet instantiated: " + this.toString());
   }
 
   public static Cursor getCursorForAll(Context context) throws IOException {
@@ -51,8 +59,13 @@ public class Snippet {
     return cursor;
   }
 
+  @Override
   public String toString() {
-    return this.getText() + " - " + this.getCreated().toString();
+    return "Snippet{" +
+        "text: '" + text + '\'' +
+        ", created: " + created +
+        ", personId: '" + personId + '\'' +
+        '}';
   }
 
   public String getText() {
@@ -88,5 +101,13 @@ public class Snippet {
 
     // Insert the new row, returning the primary key value of the new row
     return db.insert(this.TABLE_NAME, "", values);
+  }
+
+  public String getPersonId() {
+    return personId;
+  }
+
+  public void setPersonId(String personId) {
+    this.personId = personId;
   }
 }

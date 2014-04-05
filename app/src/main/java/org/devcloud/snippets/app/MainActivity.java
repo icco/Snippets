@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.plus.model.people.Person;
+
 import java.io.IOException;
 
 
@@ -18,8 +20,6 @@ public class MainActivity extends PlusBaseActivity {
   private static final String TAG = "MainActivity";
 
   private int post_fragment_id, list_fragment_id;
-
-  private Bundle savedInstanceState;
 
   /**
    * Called when the {@link PlusClient} revokes access to this app.
@@ -34,23 +34,21 @@ public class MainActivity extends PlusBaseActivity {
    */
   @Override
   protected void onPlusClientSignIn() {
+    buildUI();
+  }
 
-    setContentView(R.layout.activity_main);
-    if (savedInstanceState == null) {
+  private void buildUI() {
+    Fragment list_fragment = new SnippetListFragment();
+    Fragment post_fragment = new NewPostFragment();
 
-      Fragment list_fragment = new SnippetListFragment();
-      Fragment post_fragment = new NewPostFragment();
+    getSupportFragmentManager().beginTransaction()
+        .add(R.id.container, post_fragment)
+        .add(R.id.container, list_fragment)
+        .commit();
 
-      getSupportFragmentManager().beginTransaction()
-          .add(R.id.container, post_fragment)
-          .add(R.id.container, list_fragment)
-          .commit();
-
-      // Save IDs
-      list_fragment_id = list_fragment.getId();
-      post_fragment_id = post_fragment.getId();
-    }
-
+    // Save IDs
+    list_fragment_id = list_fragment.getId();
+    post_fragment_id = post_fragment.getId();
   }
 
   /**
@@ -58,7 +56,7 @@ public class MainActivity extends PlusBaseActivity {
    */
   @Override
   protected void onPlusClientSignOut() {
-
+    finish();
   }
 
   /**
@@ -82,16 +80,28 @@ public class MainActivity extends PlusBaseActivity {
 
   }
 
+  /**
+   * Initial entry point into the class.
+   *
+   * @param savedInstanceState
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    this.savedInstanceState = savedInstanceState;
-    this.signIn();
-    // Now we wait for onConnected to be called
+    setContentView(R.layout.activity_main);
+
+    if (savedInstanceState == null) {
+      // Now we wait for onConnected to be called
+      this.signIn();
+    }
   }
 
+  /**
+   * Saves a message stored in an edit text widget.
+   *
+   * @param view
+   */
   public void saveMessage(View view) {
-
     SnippetListFragment list = (SnippetListFragment) getSupportFragmentManager().findFragmentById(list_fragment_id);
 
     // Get the text.
@@ -103,7 +113,9 @@ public class MainActivity extends PlusBaseActivity {
     try {
       // Save the text.
       if (!message.isEmpty()) {
-        Snippet snippet = new Snippet(message);
+        Person user = this.getPlusClient().getCurrentPerson();
+
+        Snippet snippet = new Snippet(message, user);
         snippet.save(context);
 
         // Reload view
@@ -137,5 +149,15 @@ public class MainActivity extends PlusBaseActivity {
       return true;
     }
     return super.onOptionsItemSelected(item);
+  }
+
+  public void signOut(MenuItem item) {
+    signOut();
+  }
+
+  public void settingsClick(MenuItem item) {
+    CharSequence text = "This is not implemented yet.";
+    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+    toast.show();
   }
 }
