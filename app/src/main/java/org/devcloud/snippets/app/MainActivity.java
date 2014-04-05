@@ -1,8 +1,10 @@
 package org.devcloud.snippets.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,32 +12,17 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 
 import java.io.IOException;
 
 
-public class MainActivity extends PlusBaseActivity {
+public class MainActivity extends FragmentActivity {
 
   private static final String TAG = "MainActivity";
 
   private int post_fragment_id, list_fragment_id;
-
-  /**
-   * Called when the {@link PlusClient} revokes access to this app.
-   */
-  @Override
-  protected void onPlusClientRevokeAccess() {
-
-  }
-
-  /**
-   * Called when the PlusClient is successfully connected.
-   */
-  @Override
-  protected void onPlusClientSignIn() {
-    buildUI();
-  }
 
   private void buildUI() {
     Fragment list_fragment = new SnippetListFragment();
@@ -51,34 +38,6 @@ public class MainActivity extends PlusBaseActivity {
     post_fragment_id = post_fragment.getId();
   }
 
-  /**
-   * Called when the {@link PlusClient} is disconnected.
-   */
-  @Override
-  protected void onPlusClientSignOut() {
-    finish();
-  }
-
-  /**
-   * Called when the {@link PlusClient} is blocking the UI.  If you have a progress bar widget,
-   * this tells you when to show or hide it.
-   *
-   * @param show
-   */
-  @Override
-  protected void onPlusClientBlockingUI(boolean show) {
-
-  }
-
-  /**
-   * Called when there is a change in connection state.  If you have "Sign in"/ "Connect",
-   * "Sign out"/ "Disconnect", or "Revoke access" buttons, this lets you know when their states
-   * need to be updated.
-   */
-  @Override
-  protected void updateConnectButtonState() {
-
-  }
 
   /**
    * Initial entry point into the class.
@@ -92,7 +51,7 @@ public class MainActivity extends PlusBaseActivity {
 
     if (savedInstanceState == null) {
       // Now we wait for onConnected to be called
-      this.signIn();
+      buildUI();
     }
   }
 
@@ -113,8 +72,7 @@ public class MainActivity extends PlusBaseActivity {
     try {
       // Save the text.
       if (!message.isEmpty()) {
-        Person user = this.getPlusClient().getCurrentPerson();
-
+        Person user = Plus.PeopleApi.getCurrentPerson(Const.getGoogleApiClient(this));
         Snippet snippet = new Snippet(message, user);
         snippet.save(context);
 
@@ -152,7 +110,8 @@ public class MainActivity extends PlusBaseActivity {
   }
 
   public void signOut(MenuItem item) {
-    signOut();
+    Intent intent = new Intent();
+
   }
 
   public void settingsClick(MenuItem item) {

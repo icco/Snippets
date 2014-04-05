@@ -33,6 +33,10 @@ public class Snippet {
     Log.i(TAG, "Snippet instantiated: " + this.toString());
   }
 
+  public Snippet(String msg) {
+    throw new UnsupportedOperationException("Not yet implemented.");
+  }
+
   public static Cursor getCursorForAll(Context context) throws IOException {
     DatabaseHelper mDbHelper = new DatabaseHelper(context);
     ArrayList<Snippet> list = new ArrayList<Snippet>();

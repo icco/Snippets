@@ -10,9 +10,9 @@
       android:onClick="settingsClick"/>
 
   <item
-    android:id="@+id/sign_out"
-    android:title="Sign Out"
-    android:orderInCategory="2"
-    android:onClick="signOut"
-    />
+      android:id="@+id/sign_out"
+      android:title="Sign Out"
+      android:orderInCategory="2"
+      android:onClick="signOut"
+      />
 </menu>

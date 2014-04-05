@@ -8,5 +8,6 @@
   <string name="empty_list">No snippets saved yet.</string>
   <string name="button_text">Save</string>
   <string name="ellipsis">...</string>
+  <string name="title_activity_logged_out">Logged Out</string>
 
 </resources>
