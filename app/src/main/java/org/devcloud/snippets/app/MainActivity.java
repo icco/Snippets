@@ -1,11 +1,8 @@
 package org.devcloud.snippets.app;
 
-import android.accounts.Account;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,45 +10,84 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.plus.Plus;
-
 import java.io.IOException;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends PlusBaseActivity {
 
   private static final String TAG = "MainActivity";
 
   private int post_fragment_id, list_fragment_id;
 
+  private Bundle savedInstanceState;
+
+  /**
+   * Called when the {@link PlusClient} revokes access to this app.
+   */
+  @Override
+  protected void onPlusClientRevokeAccess() {
+
+  }
+
+  /**
+   * Called when the PlusClient is successfully connected.
+   */
+  @Override
+  protected void onPlusClientSignIn() {
+
+    setContentView(R.layout.activity_main);
+    if (savedInstanceState == null) {
+
+      Fragment list_fragment = new SnippetListFragment();
+      Fragment post_fragment = new NewPostFragment();
+
+      getSupportFragmentManager().beginTransaction()
+          .add(R.id.container, post_fragment)
+          .add(R.id.container, list_fragment)
+          .commit();
+
+      // Save IDs
+      list_fragment_id = list_fragment.getId();
+      post_fragment_id = post_fragment.getId();
+    }
+
+  }
+
+  /**
+   * Called when the {@link PlusClient} is disconnected.
+   */
+  @Override
+  protected void onPlusClientSignOut() {
+
+  }
+
+  /**
+   * Called when the {@link PlusClient} is blocking the UI.  If you have a progress bar widget,
+   * this tells you when to show or hide it.
+   *
+   * @param show
+   */
+  @Override
+  protected void onPlusClientBlockingUI(boolean show) {
+
+  }
+
+  /**
+   * Called when there is a change in connection state.  If you have "Sign in"/ "Connect",
+   * "Sign out"/ "Disconnect", or "Revoke access" buttons, this lets you know when their states
+   * need to be updated.
+   */
+  @Override
+  protected void updateConnectButtonState() {
+
+  }
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-    String account = Plus.AccountApi.getAccountName(Const.getApiClient(this));
-
-    if (account == null) {
-      Intent intent = new Intent();
-      intent.setClass(this, LoginActivity.class);
-      startActivity(intent);
-      finish();
-    } else {
-      setContentView(R.layout.activity_main);
-      if (savedInstanceState == null) {
-
-        Fragment list_fragment = new SnippetListFragment();
-        Fragment post_fragment = new NewPostFragment();
-
-        getSupportFragmentManager().beginTransaction()
-            .add(R.id.container, post_fragment)
-            .add(R.id.container, list_fragment)
-            .commit();
-
-        // Save IDs
-        list_fragment_id = list_fragment.getId();
-        post_fragment_id = post_fragment.getId();
-      }
-    }
+    this.savedInstanceState = savedInstanceState;
+    this.signIn();
+    // Now we wait for onConnected to be called
   }
 
   public void saveMessage(View view) {
