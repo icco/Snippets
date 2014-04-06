@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.google.android.gms.plus.model.people.Person;
-
 public class LoggedOutActivity extends PlusBaseActivity {
 
   private static final String TAG = "LoggedOutActivity";
@@ -25,7 +23,7 @@ public class LoggedOutActivity extends PlusBaseActivity {
   @Override
   protected void onPlusClientSignIn() {
     String person = getPlusClient().getAccountName();
-    Log.w(TAG, person.toString());
+    Log.w(TAG, "Logged in: " + person.toString());
     Const.setUserId(this.getApplicationContext(), person);
     Intent intent = new Intent(this, MainActivity.class);
     startActivity(intent);
@@ -64,7 +62,13 @@ public class LoggedOutActivity extends PlusBaseActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_logged_out);
+
+    Intent intent = getIntent();
+    if (intent != null && intent.hasExtra(MainActivity.SIGN_OUT_MESSAGE)) {
+      signOut();
+    }
   }
+
 
   public void signin(View view) {
     signIn();

@@ -6,8 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.google.android.gms.plus.model.people.Person;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;

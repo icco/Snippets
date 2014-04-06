@@ -12,16 +12,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.plus.Plus;
-import com.google.android.gms.plus.model.people.Person;
-
 import java.io.IOException;
 
 
 public class MainActivity extends FragmentActivity {
 
+  static final String SIGN_OUT_MESSAGE = "SIGN_OUT";
   private static final String TAG = "MainActivity";
-
   private int post_fragment_id, list_fragment_id;
 
   private void buildUI() {
@@ -109,8 +106,9 @@ public class MainActivity extends FragmentActivity {
   }
 
   public void signOut(MenuItem item) {
-    Intent intent = new Intent();
-
+    Intent intent = new Intent(this, LoggedOutActivity.class);
+    intent.putExtra(SIGN_OUT_MESSAGE, true);
+    startActivity(intent);
   }
 
   public void settingsClick(MenuItem item) {
