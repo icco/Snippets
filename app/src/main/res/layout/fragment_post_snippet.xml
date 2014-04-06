@@ -10,19 +10,22 @@
   <EditText
       android:layout_width="match_parent"
       android:layout_height="100dp"
-      android:inputType="textMultiLine"
       android:ems="10"
       android:id="@+id/edit_message"
-      android:typeface="normal"
+      android:typeface="serif"
       android:width="@dimen/activity_horizontal_margin"
       android:autoText="true"
       android:layout_toLeftOf="@+id/button"
-      android:capitalize="sentences"
+      android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
       android:editable="true"
       android:textIsSelectable="true"
       android:hint="How's your day going?"
       android:focusable="true"
-      android:gravity="top"/>
+      android:gravity="top"
+      android:focusableInTouchMode="true"
+      android:enabled="true"
+      android:longClickable="false"
+      android:onClick="editTextOnTap"/>
 
   <Button
       android:layout_width="70dp"

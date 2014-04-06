@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -115,5 +116,21 @@ public class MainActivity extends FragmentActivity {
     CharSequence text = "This is not implemented yet.";
     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
     toast.show();
+  }
+
+  public void editTextOnTap(View view) {
+    boolean setToEditable = true;
+
+    EditText textView = (EditText) view
+        .findViewById(R.id.edit_message);
+
+    textView.setFocusableInTouchMode(setToEditable);
+    textView.setFocusable(setToEditable);
+
+    InputMethodManager imm = (InputMethodManager) view.getContext().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+
+    textView.requestFocus();
+    imm.showSoftInput(textView, 0);
   }
 }
