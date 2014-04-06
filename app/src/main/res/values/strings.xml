@@ -9,5 +9,7 @@
   <string name="button_text">Save</string>
   <string name="ellipsis">...</string>
   <string name="title_activity_logged_out">Logged Out</string>
+  <string name="logged_out_title">Your Daily Journal</string>
+  <string name="title">Snippets</string>
 
 </resources>

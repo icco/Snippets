@@ -1,9 +1,15 @@
 package org.devcloud.snippets.app;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import com.google.android.gms.plus.model.people.Person;
 
 public class LoggedOutActivity extends PlusBaseActivity {
+
+  private static final String TAG = "LoggedOutActivity";
 
   /**
    * Called when the {@link PlusClient} revokes access to this app.
@@ -18,7 +24,11 @@ public class LoggedOutActivity extends PlusBaseActivity {
    */
   @Override
   protected void onPlusClientSignIn() {
-
+    String person = getPlusClient().getAccountName();
+    Log.w(TAG, person.toString());
+    Const.setUserId(this.getApplicationContext(), person);
+    Intent intent = new Intent(this, MainActivity.class);
+    startActivity(intent);
   }
 
   /**
@@ -26,7 +36,7 @@ public class LoggedOutActivity extends PlusBaseActivity {
    */
   @Override
   protected void onPlusClientSignOut() {
-
+    Const.deleteUserId(this.getApplicationContext());
   }
 
   /**
@@ -54,5 +64,9 @@ public class LoggedOutActivity extends PlusBaseActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_logged_out);
+  }
+
+  public void signin(View view) {
+    signIn();
   }
 }

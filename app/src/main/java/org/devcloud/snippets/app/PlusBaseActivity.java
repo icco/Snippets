@@ -77,8 +77,10 @@ public abstract class PlusBaseActivity extends FragmentActivity
             this
         ).setScopes(
             Scopes.PLUS_LOGIN,
-            Scopes.PROFILE
+            Scopes.PROFILE,
+            Scopes.PLUS_ME
         ).build();
+
   }
 
   /**

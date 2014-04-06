@@ -24,12 +24,11 @@ public class Snippet {
   private Date created;
   private String personId;
 
-  public Snippet(String msg, Person person) {
+  public Snippet(String msg, String personId) {
     this.setText(msg);
     this.setCreated(new Date());
-    if (person != null) {
-      this.setPersonId(person.getId());
-    }
+    this.setPersonId(personId);
+
     Log.i(TAG, "Snippet instantiated: " + this.toString());
   }
 

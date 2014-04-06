@@ -72,8 +72,7 @@ public class MainActivity extends FragmentActivity {
     try {
       // Save the text.
       if (!message.isEmpty()) {
-        Person user = Plus.PeopleApi.getCurrentPerson(Const.getGoogleApiClient(this));
-        Snippet snippet = new Snippet(message, user);
+        Snippet snippet = new Snippet(message, Const.getUserId(context));
         snippet.save(context);
 
         // Reload view
