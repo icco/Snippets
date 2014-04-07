@@ -73,7 +73,7 @@
       android:layout_alignParentRight="true"
       android:layout_alignParentEnd="true"
       android:layout_marginRight="15dp"
-      android:onClick="signin"/>
+      android:onClick="signIn"/>
 
 
 </RelativeLayout>

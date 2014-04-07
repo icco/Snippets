@@ -23,7 +23,10 @@ public class LoggedOutActivity extends PlusBaseActivity {
   @Override
   protected void onPlusClientSignIn() {
     Intent intent = getIntent();
-    if (intent != null && intent.hasExtra(MainActivity.SIGN_OUT_MESSAGE)) {
+    if (intent != null && intent.getBooleanExtra(MainActivity.SIGN_OUT_MESSAGE, false)) {
+      getPlusClient().clearDefaultAccount();
+      Const.deleteUserId(this.getApplicationContext());
+      intent.putExtra(MainActivity.SIGN_OUT_MESSAGE, false);
       signOut();
     } else {
       String person = getPlusClient().getAccountName();
@@ -71,7 +74,7 @@ public class LoggedOutActivity extends PlusBaseActivity {
     setContentView(R.layout.activity_logged_out);
 
     Intent intent = getIntent();
-    if (intent != null && intent.hasExtra(MainActivity.SIGN_OUT_MESSAGE)) {
+    if (intent != null && intent.getBooleanExtra(MainActivity.SIGN_OUT_MESSAGE, false)) {
       Log.i(TAG, "Got log out intent.");
       Const.deleteUserId(this.getApplicationContext());
       signOut();
