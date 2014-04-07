@@ -11,5 +11,6 @@
   <string name="title_activity_logged_out">Logged Out</string>
   <string name="logged_out_title">Your Daily Journal</string>
   <string name="title">Snippets</string>
+  <string name="hint_text">How\'s your day going?</string>
 
 </resources>

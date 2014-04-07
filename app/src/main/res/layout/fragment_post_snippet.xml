@@ -19,13 +19,14 @@
       android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
       android:editable="true"
       android:textIsSelectable="true"
-      android:hint="How's your day going?"
+      android:hint="@string/hint_text"
       android:focusable="true"
       android:gravity="top"
       android:focusableInTouchMode="true"
       android:enabled="true"
-      android:longClickable="false"
-      android:onClick="editTextOnTap"/>
+      android:longClickable="true"
+      android:onClick="editTextOnTap"
+      android:clickable="false"/>
 
   <Button
       android:layout_width="70dp"

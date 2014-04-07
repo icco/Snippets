@@ -134,9 +134,11 @@ public class MainActivity extends FragmentActivity {
   }
 
   public void closeKeyboard(View view) {
-    EditText textView = (EditText) view.findViewById(R.id.edit_message);
-    InputMethodManager imm = (InputMethodManager)getSystemService(
-        Context.INPUT_METHOD_SERVICE);
-    imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
+    try {
+      InputMethodManager imm = (InputMethodManager) view.getContext().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+      imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    } catch (NullPointerException e) {
+      Log.e(TAG, e.getMessage(), e);
+    }
   }
 }
