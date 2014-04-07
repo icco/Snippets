@@ -48,7 +48,7 @@ public class Snippet {
       throw new IOException("Database not readable.");
     }
 
-    String[] columns = {"_id", COLUMN_NAME_TEXT, COLUMN_NAME_DATE};
+    String[] columns = {"_id", COLUMN_NAME_TEXT, COLUMN_NAME_DATE, COLUMN_NAME_USERID};
     String[] empty = {};
     Cursor cursor = db.query(
         TABLE_NAME,

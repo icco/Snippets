@@ -84,6 +84,7 @@ public class MainActivity extends FragmentActivity {
     } catch (IOException e) {
       Log.e(TAG, e.getMessage(), e);
     }
+
   }
 
   @Override

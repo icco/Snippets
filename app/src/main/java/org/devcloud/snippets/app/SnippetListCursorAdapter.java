@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
+import static org.devcloud.snippets.app.BuildConfig.DEBUG;
+
 class SnippetListCursorAdapter extends CursorAdapter {
   static final String TAG = "SnippetListCursorAdapter";
 
@@ -57,5 +59,10 @@ class SnippetListCursorAdapter extends CursorAdapter {
 
     TextView list_item_date = (TextView) view.findViewById(R.id.date);
     list_item_date.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_DATE)));
+
+    if (DEBUG) {
+      TextView list_item_user = (TextView) view.findViewById(R.id.user);
+      list_item_user.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_USERID)));
+    }
   }
 }
