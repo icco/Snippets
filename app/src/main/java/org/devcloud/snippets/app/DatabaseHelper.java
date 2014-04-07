@@ -54,7 +54,7 @@ class DatabaseHelper extends SQLiteOpenHelper {
           db.execSQL("DROP TABLE IF EXISTS " + Snippet.TABLE_NAME);
           onCreate(db);
         } else {
-          db.execSQL("ALTER TABLE "  + Snippet.TABLE_NAME + " ADD COLUMN '" + Snippet.COLUMN_NAME_USERID + "' " + Snippet.COLUMN_TYPE_USERID);
+          db.execSQL("ALTER TABLE " + Snippet.TABLE_NAME + " ADD COLUMN '" + Snippet.COLUMN_NAME_USERID + "' " + Snippet.COLUMN_TYPE_USERID);
         }
     }
   }
