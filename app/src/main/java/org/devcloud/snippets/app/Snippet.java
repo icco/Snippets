@@ -13,19 +13,22 @@ import java.util.Date;
 public class Snippet {
   public final static String TABLE_NAME = "snippets";
 
-  public final static String COLUMN_NAME_TEXT = "text";
-  public final static String COLUMN_TYPE_TEXT = "text";
-  public final static String COLUMN_NAME_DATE = "created";
-  public final static String COLUMN_TYPE_DATE = "datetime";
-  private static final String TAG = "Snippet";
+  final static String COLUMN_NAME_TEXT = "text";
+  final static String COLUMN_TYPE_TEXT = "text";
+  final static String COLUMN_NAME_DATE = "created";
+  final static String COLUMN_TYPE_DATE = "datetime";
+  static final String COLUMN_TYPE_USERID = "text";
+  static final String COLUMN_NAME_USERID = "user_id";
+  static final String TAG = "Snippet";
+
   private String text;
   private Date created;
-  private String personId;
+  private String userId;
 
-  public Snippet(String msg, String personId) {
+  public Snippet(String msg, String userId) {
     this.setText(msg);
     this.setCreated(new Date());
-    this.setPersonId(personId);
+    this.setUserId(userId);
 
     Log.i(TAG, "Snippet instantiated: " + this.toString());
   }
@@ -63,9 +66,9 @@ public class Snippet {
   @Override
   public String toString() {
     return "Snippet{" +
-        "text: '" + text + '\'' +
-        ", created: " + created +
-        ", personId: '" + personId + '\'' +
+        "text: '" + getText() + '\'' +
+        ", created: " + getCreated() +
+        ", user_id: '" + getUserId() + '\'' +
         '}';
   }
 
@@ -99,16 +102,17 @@ public class Snippet {
     ContentValues values = new ContentValues();
     values.put(this.COLUMN_NAME_TEXT, this.getText());
     values.put(this.COLUMN_NAME_DATE, DatabaseHelper.fmtDate(this.getCreated()));
+    values.put(this.COLUMN_NAME_USERID, this.getUserId());
 
     // Insert the new row, returning the primary key value of the new row
     return db.insert(this.TABLE_NAME, "", values);
   }
 
-  public String getPersonId() {
-    return personId;
+  public String getUserId() {
+    return userId;
   }
 
-  public void setPersonId(String personId) {
-    this.personId = personId;
+  public void setUserId(String id) {
+    this.userId = id;
   }
 }
