@@ -89,7 +89,6 @@ public class MainActivity extends FragmentActivity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-
     // Inflate the menu; this adds items to the action bar if it is present.
     getMenuInflater().inflate(R.menu.main, menu);
     return true;
@@ -122,8 +121,7 @@ public class MainActivity extends FragmentActivity {
   public void editTextOnTap(View view) {
     boolean setToEditable = true;
 
-    EditText textView = (EditText) view
-        .findViewById(R.id.edit_message);
+    EditText textView = (EditText) view.findViewById(R.id.edit_message);
 
     textView.setFocusableInTouchMode(setToEditable);
     textView.setFocusable(setToEditable);
@@ -133,5 +131,12 @@ public class MainActivity extends FragmentActivity {
 
     textView.requestFocus();
     imm.showSoftInput(textView, 0);
+  }
+
+  public void closeKeyboard(View view) {
+    EditText textView = (EditText) view.findViewById(R.id.edit_message);
+    InputMethodManager imm = (InputMethodManager)getSystemService(
+        Context.INPUT_METHOD_SERVICE);
+    imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
   }
 }
