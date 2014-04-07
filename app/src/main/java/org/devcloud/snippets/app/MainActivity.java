@@ -106,13 +106,13 @@ public class MainActivity extends FragmentActivity {
     return super.onOptionsItemSelected(item);
   }
 
-  public void signOut(MenuItem item) {
+  public void signOutMenuItem(MenuItem item) {
     Intent intent = new Intent(this, LoggedOutActivity.class);
     intent.putExtra(SIGN_OUT_MESSAGE, true);
     startActivity(intent);
   }
 
-  public void settingsClick(MenuItem item) {
+  public void settingsMenuItem(MenuItem item) {
     CharSequence text = "This is not implemented yet.";
     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
     toast.show();

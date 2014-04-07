@@ -144,6 +144,8 @@ public abstract class PlusBaseActivity extends FragmentActivity
       initiatePlusClientDisconnect();
 
       Log.v(TAG, "Sign out successful!");
+    } else {
+      Log.v(TAG, "Not connected!");
     }
 
     updateConnectButtonState();
@@ -283,5 +285,4 @@ public abstract class PlusBaseActivity extends FragmentActivity
   public PlusClient getPlusClient() {
     return mPlusClient;
   }
-
 }

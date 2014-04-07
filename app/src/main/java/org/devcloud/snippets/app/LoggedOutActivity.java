@@ -22,11 +22,16 @@ public class LoggedOutActivity extends PlusBaseActivity {
    */
   @Override
   protected void onPlusClientSignIn() {
-    String person = getPlusClient().getAccountName();
-    Log.w(TAG, "Logged in: " + person.toString());
-    Const.setUserId(this.getApplicationContext(), person);
-    Intent intent = new Intent(this, MainActivity.class);
-    startActivity(intent);
+    Intent intent = getIntent();
+    if (intent != null && intent.hasExtra(MainActivity.SIGN_OUT_MESSAGE)) {
+      signOut();
+    } else {
+      String person = getPlusClient().getAccountName();
+      Log.w(TAG, "Logged in: " + person.toString());
+      Const.setUserId(this.getApplicationContext(), person);
+      intent = new Intent(this, MainActivity.class);
+      startActivity(intent);
+    }
   }
 
   /**
@@ -34,6 +39,8 @@ public class LoggedOutActivity extends PlusBaseActivity {
    */
   @Override
   protected void onPlusClientSignOut() {
+    Log.i(TAG, "Signing out.");
+    getPlusClient().clearDefaultAccount();
     Const.deleteUserId(this.getApplicationContext());
   }
 
@@ -65,12 +72,13 @@ public class LoggedOutActivity extends PlusBaseActivity {
 
     Intent intent = getIntent();
     if (intent != null && intent.hasExtra(MainActivity.SIGN_OUT_MESSAGE)) {
+      Log.i(TAG, "Got log out intent.");
+      Const.deleteUserId(this.getApplicationContext());
       signOut();
     }
   }
 
-
-  public void signin(View view) {
+  public void signIn(View view) {
     signIn();
   }
 }
