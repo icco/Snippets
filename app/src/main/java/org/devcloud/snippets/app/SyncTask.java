@@ -1,0 +1,7 @@
+package org.devcloud.snippets.app;
+
+/**
+ * Created by nat on 4/8/14.
+ */
+public class SyncTask {
+}
