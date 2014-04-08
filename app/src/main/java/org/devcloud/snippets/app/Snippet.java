@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import org.json.JSONArray;
+
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,11 +22,13 @@ public class Snippet {
   final static String COLUMN_TYPE_DATE = "datetime";
   static final String COLUMN_TYPE_USERID = "text";
   static final String COLUMN_NAME_USERID = "user_id";
+  static final String COLUMN_NAME_ID = "_id";
   static final String TAG = "Snippet";
 
   private String text;
   private Date created;
   private String userId;
+  private long id;
 
   public Snippet(String msg, String userId) {
     this.setText(msg);
@@ -48,7 +53,7 @@ public class Snippet {
       throw new IOException("Database not readable.");
     }
 
-    String[] columns = {"_id", COLUMN_NAME_TEXT, COLUMN_NAME_DATE, COLUMN_NAME_USERID};
+    String[] columns = {COLUMN_NAME_ID, COLUMN_NAME_TEXT, COLUMN_NAME_DATE, COLUMN_NAME_USERID};
     String[] empty = {};
     Cursor cursor = db.query(
         TABLE_NAME,
@@ -61,6 +66,38 @@ public class Snippet {
         COLUMN_NAME_DATE + " DESC");
 
     return cursor;
+  }
+
+  static ArrayList<Snippet> getArrayListForAll(Context context) {
+    ArrayList<Snippet> snips = new ArrayList<Snippet>();
+
+    try {
+      Cursor cursor = Snippet.getCursorForAll(context);
+      for (cursor.moveToFirst(); cursor.isAfterLast(); cursor.moveToNext()) {
+        Snippet snip = new Snippet(
+            cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_TEXT)),
+            cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_USERID))
+        );
+
+        snip.setCreated(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_DATE)));
+        snip.setId(cursor.getLong(cursor.getColumnIndex(Snippet.COLUMN_NAME_ID)));
+
+        snips.add(snip);
+      }
+    } catch (IOException e) {
+      Log.e(TAG, e.getMessage(), e);
+    }
+
+    return snips;
+  }
+
+  private void setCreated(String string) {
+    try {
+      Date date = DatabaseHelper.parseDate(string);
+      this.setCreated(date);
+    } catch (ParseException e) {
+      Log.e(TAG, e.getMessage(), e);
+    }
   }
 
   @Override
@@ -105,12 +142,13 @@ public class Snippet {
     values.put(this.COLUMN_NAME_USERID, this.getUserId());
 
     // Insert the new row, returning the primary key value of the new row
-    long new_id = db.insert(this.TABLE_NAME, "", values);
+    this.setId(db.insert(this.TABLE_NAME, "", values));
 
     // Send a SyncTask to the server.
-    new SyncTask().execute();
+    JSONArray json = new JSONArray(Snippet.getArrayListForAll(context));
+    new SyncTask().execute(json.toString());
 
-    return new_id;
+    return this.getId();
   }
 
   public String getUserId() {
@@ -119,5 +157,13 @@ public class Snippet {
 
   public void setUserId(String id) {
     this.userId = id;
+  }
+
+  public long getId() {
+    return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
   }
 }

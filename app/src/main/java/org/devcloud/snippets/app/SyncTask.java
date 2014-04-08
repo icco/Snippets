@@ -20,19 +20,20 @@ import java.util.List;
 /**
  * Created by nat on 4/8/14.
  */
-public class SyncTask extends AsyncTask<Void, Void, JSONArray> {
+public class SyncTask extends AsyncTask<String, Void, JSONArray> {
   private static final String TAG = "SyncTask";
 
   @Override
-  protected JSONArray doInBackground(Void... params) {
+  protected JSONArray doInBackground(String... params) {
     try {
       HttpClient httpclient = new DefaultHttpClient();
       HttpPost httppost = new HttpPost("https://snippets-app-api.herokuapp.com/user");
 
       // Add your data
-      List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-      nameValuePairs.add(new BasicNameValuePair("id", "12345"));
-      nameValuePairs.add(new BasicNameValuePair("stringdata", "AndDev is Cool!"));
+      List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(params.length);
+      for (String value : params) {
+        nameValuePairs.add(new BasicNameValuePair("data[]", value));
+      }
       httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
       // Execute HTTP Post Request
@@ -47,6 +48,7 @@ public class SyncTask extends AsyncTask<Void, Void, JSONArray> {
       }
       reader.close();
       String result11 = sb.toString();
+      Log.i(TAG, "Got the following response: " + result11);
 
       // parsing data
       return new JSONArray(result11);
