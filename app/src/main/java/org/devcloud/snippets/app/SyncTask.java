@@ -5,15 +5,19 @@ import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,19 +55,27 @@ public class SyncTask extends AsyncTask<String, Void, JSONArray> {
       Log.i(TAG, "Got the following response: " + result11);
 
       // parsing data
+
       return new JSONArray(result11);
-    } catch (Exception e) {
+    } catch (JSONException e) {
       Log.e(TAG, e.getMessage(), e);
-      return null;
+    } catch (ClientProtocolException e) {
+      Log.e(TAG, e.getMessage(), e);
+    } catch (UnsupportedEncodingException e) {
+      Log.e(TAG, e.getMessage(), e);
+    } catch (IOException e) {
+      Log.e(TAG, e.getMessage(), e);
     }
+
+    return null;
   }
 
   @Override
   protected void onPostExecute(JSONArray result) {
     if (result != null) {
-      // do something
+      Log.i(TAG, "Post was Successful.");
     } else {
-      // error occured
+      Log.e(TAG, "Post could not be completed. Will try again with next save.");
     }
   }
 }

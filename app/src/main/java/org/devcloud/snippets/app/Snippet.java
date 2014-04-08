@@ -84,6 +84,8 @@ public class Snippet {
 
         snips.add(snip);
       }
+
+      cursor.close();
     } catch (IOException e) {
       Log.e(TAG, e.getMessage(), e);
     }
