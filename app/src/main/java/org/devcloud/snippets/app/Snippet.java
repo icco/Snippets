@@ -105,7 +105,12 @@ public class Snippet {
     values.put(this.COLUMN_NAME_USERID, this.getUserId());
 
     // Insert the new row, returning the primary key value of the new row
-    return db.insert(this.TABLE_NAME, "", values);
+    long new_id = db.insert(this.TABLE_NAME, "", values);
+
+    // Send a SyncTask to the server.
+    new SyncTask().execute();
+
+    return new_id;
   }
 
   public String getUserId() {
