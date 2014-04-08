@@ -73,7 +73,7 @@ public class Snippet {
 
     try {
       Cursor cursor = Snippet.getCursorForAll(context);
-      for (cursor.moveToFirst(); cursor.isAfterLast(); cursor.moveToNext()) {
+      for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
         Snippet snip = new Snippet(
             cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_TEXT)),
             cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_USERID))
@@ -90,6 +90,7 @@ public class Snippet {
       Log.e(TAG, e.getMessage(), e);
     }
 
+    Log.i(TAG, "Built array: " + snips.toString());
     return snips;
   }
 

@@ -36,7 +36,9 @@ public class SyncTask extends AsyncTask<String, Void, JSONArray> {
       // Add your data
       List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(params.length);
       for (String value : params) {
-        nameValuePairs.add(new BasicNameValuePair("data[]", value));
+        nameValuePairs.add(new BasicNameValuePair(
+            String.format("data_%d", value.hashCode()),
+            value));
       }
       httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
