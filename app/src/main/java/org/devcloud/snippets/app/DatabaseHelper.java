@@ -12,7 +12,7 @@ import java.util.Locale;
 class DatabaseHelper extends SQLiteOpenHelper {
 
   // If you change the database schema, you must increment the database version.
-  public static final int DATABASE_VERSION = 3;
+  public static final int DATABASE_VERSION = 4;
   public static final String DATABASE_NAME = "Snippets.db";
 
   public DatabaseHelper(Context context) {
@@ -34,11 +34,14 @@ class DatabaseHelper extends SQLiteOpenHelper {
   }
 
   public void onCreate(SQLiteDatabase db) {
-    db.execSQL("CREATE TABLE " + Snippet.TABLE_NAME + " (_id INTEGER PRIMARY KEY," +
-        Snippet.COLUMN_NAME_TEXT + " " + Snippet.COLUMN_TYPE_TEXT + " NOT NULL, " +
-        Snippet.COLUMN_NAME_DATE + " " + Snippet.COLUMN_TYPE_DATE + " NOT NULL" +
-        Snippet.COLUMN_NAME_USERID + " " + Snippet.COLUMN_TYPE_USERID + " NOT NULL" +
-        ")");
+    db.execSQL(String.format(
+        "CREATE TABLE %s (%s INT PRIMARY KEY, %s %s NOT NULL, %s %s NOT NULL, %s %s NOT NULL)",
+        Snippet.TABLE_NAME,
+        Snippet.COLUMN_NAME_ID,
+        Snippet.COLUMN_NAME_TEXT, Snippet.COLUMN_TYPE_TEXT,
+        Snippet.COLUMN_NAME_DATE, Snippet.COLUMN_TYPE_DATE,
+        Snippet.COLUMN_NAME_USERID, Snippet.COLUMN_TYPE_USERID
+    ));
   }
 
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -49,13 +52,28 @@ class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + Snippet.TABLE_NAME);
         onCreate(db);
       }
-      case 2:
+      case 2: {
         if (newVersion < 2) {
           db.execSQL("DROP TABLE IF EXISTS " + Snippet.TABLE_NAME);
           onCreate(db);
         } else {
           db.execSQL("ALTER TABLE " + Snippet.TABLE_NAME + " ADD COLUMN '" + Snippet.COLUMN_NAME_USERID + "' " + Snippet.COLUMN_TYPE_USERID);
         }
+      }
+      case 3: {
+        if (newVersion < 3) {
+          db.execSQL("DROP TABLE IF EXISTS " + Snippet.TABLE_NAME);
+          onCreate(db);
+        } else {
+          /*
+          TODO: FIGURE OUT HOW THE FUCK TO ADD A UUID.
+          https://developer.android.com/reference/java/util/UUID.html +
+          https://developer.android.com/reference/android/provider/Settings.Secure.html#ANDROID_ID
+          Should do it.
+          */
+
+        }
+      }
     }
   }
 
