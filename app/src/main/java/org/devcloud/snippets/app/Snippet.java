@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.Settings;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class Snippet {
   public final static String TABLE_NAME = "snippets";
@@ -24,16 +26,29 @@ public class Snippet {
   static final String COLUMN_NAME_USERID = "user_id";
   static final String COLUMN_NAME_ID = "_id";
   static final String TAG = "Snippet";
+  static final String COLUMN_TYPE_UUID = "text";
+  static final String COLUMN_NAME_UUID = "uuid";
+
+  static final String[] COLUMNS = new String[]{
+      COLUMN_NAME_ID,
+      COLUMN_NAME_TEXT,
+      COLUMN_NAME_DATE,
+      COLUMN_NAME_USERID,
+      COLUMN_NAME_UUID
+  };
 
   private String text;
   private Date created;
   private String userId;
   private long id;
+  private String uuid;
 
   public Snippet(String msg, String userId) {
     this.setText(msg);
     this.setCreated(new Date());
     this.setUserId(userId);
+
+    this.getUuid(); // Just to make sure there is one.
 
     Log.i(TAG, "Snippet instantiated: " + this.toString());
   }
@@ -53,11 +68,11 @@ public class Snippet {
       throw new IOException("Database not readable.");
     }
 
-    String[] columns = {COLUMN_NAME_ID, COLUMN_NAME_TEXT, COLUMN_NAME_DATE, COLUMN_NAME_USERID};
+
     String[] empty = {};
     Cursor cursor = db.query(
         TABLE_NAME,
-        columns,
+        COLUMNS,
         "",
         empty
         ,
@@ -74,15 +89,7 @@ public class Snippet {
     try {
       Cursor cursor = Snippet.getCursorForAll(context);
       for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-        Snippet snip = new Snippet(
-            cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_TEXT)),
-            cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_USERID))
-        );
-
-        snip.setCreated(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_DATE)));
-        snip.setId(cursor.getLong(cursor.getColumnIndex(Snippet.COLUMN_NAME_ID)));
-
-        snips.add(snip);
+        snips.add(buildFromCursorRow(cursor));
       }
 
       cursor.close();
@@ -92,6 +99,64 @@ public class Snippet {
 
     Log.i(TAG, "Built array: " + snips.toString());
     return snips;
+  }
+
+  private static Snippet buildFromCursorRow(Cursor cursor) {
+    Snippet snip = new Snippet(
+        cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_TEXT)),
+        cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_USERID))
+    );
+
+    snip.setCreated(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_DATE)));
+    snip.setId(cursor.getLong(cursor.getColumnIndex(Snippet.COLUMN_NAME_ID)));
+    snip.setUuid(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_UUID)));
+
+    return snip;
+  }
+
+  public static Snippet findByUUID(String uuid, Context context) {
+    DatabaseHelper mDbHelper = new DatabaseHelper(context);
+    SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+    assert db != null;
+
+    String[] params = {uuid};
+    Cursor cursor = db.query(
+        Snippet.TABLE_NAME,
+        COLUMNS,
+        "uuid = ?",
+        params,
+        "", // Group By
+        "", // Having
+        "", // Order By
+        "1" // Limit
+    );
+
+    if (cursor.getCount() == 0) {
+      return null;
+    } else {
+      ArrayList<Snippet> snips = new ArrayList<Snippet>(cursor.getCount());
+      for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+        snips.add(buildFromCursorRow(cursor));
+      }
+
+      return snips.get(0);
+    }
+  }
+
+  public String getUuid() {
+    if (uuid == null || uuid.equals("")) {
+      setUuid(String.format("%s.%s",
+          Settings.Secure.ANDROID_ID,
+          UUID.randomUUID().toString()
+      ));
+    }
+
+    return uuid;
+  }
+
+  public void setUuid(String uuid) {
+    this.uuid = uuid;
   }
 
   private void setCreated(String string) {
@@ -105,11 +170,13 @@ public class Snippet {
 
   @Override
   public String toString() {
-    return "Snippet{" +
-        "text: '" + getText() + '\'' +
-        ", created: " + getCreated() +
-        ", user_id: '" + getUserId() + '\'' +
-        '}';
+    return String.format(
+        "Snippet{uuid: '%s', text: '%s', created: %s, user_id: '%s'}",
+        getUuid(),
+        getText(),
+        getCreated(),
+        getUserId()
+    );
   }
 
   public String getText() {
