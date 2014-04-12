@@ -98,7 +98,7 @@ public class Snippet {
       Log.e(TAG, e.getMessage(), e);
     }
 
-    Log.i(TAG, "Built array: " + snips.toString());
+    Log.v(TAG, "Built array: " + snips.toString());
     return snips;
   }
 
