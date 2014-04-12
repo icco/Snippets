@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class Snippet {
@@ -216,7 +217,9 @@ public class Snippet {
 
     // Send a SyncTask to the server.
     JSONArray json = new JSONArray(Snippet.getArrayListForAll(context));
-    new SyncTask().execute(json.toString());
+    HashMap<String, String> map = new HashMap<String, String>(1);
+    map.put("snippet_data", json.toString());
+    new SyncTask().execute(map);
 
     return this.getId();
   }

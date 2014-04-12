@@ -19,26 +19,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
  * Created by nat on 4/8/14.
  */
-public class SyncTask extends AsyncTask<String, Void, JSONArray> {
+public class SyncTask extends AsyncTask<HashMap<String, String>, Void, JSONArray> {
   private static final String TAG = "SyncTask";
 
   @Override
-  protected JSONArray doInBackground(String... params) {
+  protected JSONArray doInBackground(HashMap<String, String>... params) {
     try {
       HttpClient httpclient = new DefaultHttpClient();
       HttpPost httppost = new HttpPost("https://snippets-app-api.herokuapp.com/user");
 
-      // Add your data
-      List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(params.length);
-      for (String value : params) {
-        nameValuePairs.add(new BasicNameValuePair(
-            String.format("data_%d", value.hashCode()),
-            value));
+      // Join the hashmaps into a single list
+      List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+      for (HashMap<String, String> map : params) {
+        for (String key : map.keySet()) {
+          nameValuePairs.add(new BasicNameValuePair(key, map.get(key)));
+        }
       }
       httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
