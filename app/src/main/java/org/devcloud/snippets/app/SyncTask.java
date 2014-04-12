@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by nat on 4/8/14.
@@ -37,8 +38,8 @@ public class SyncTask extends AsyncTask<HashMap<String, String>, Void, JSONArray
       // Join the hashmaps into a single list
       List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
       for (HashMap<String, String> map : params) {
-        for (String key : map.keySet()) {
-          nameValuePairs.add(new BasicNameValuePair(key, map.get(key)));
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+          nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
         }
       }
       httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
