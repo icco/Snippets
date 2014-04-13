@@ -75,7 +75,17 @@ public class MainActivity extends FragmentActivity {
 
         // Reload view
         editText.setText("");
-        list.refresh(context);
+        if (list != null && context != null) {
+          list.refresh(context);
+        } else {
+          if (list == null) {
+            Log.e(TAG, "list is null");
+          }
+
+          if (context == null) {
+            Log.e(TAG, "context is null");
+          }
+        }
       } else {
         CharSequence text = "Snippets can not be empty.";
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
