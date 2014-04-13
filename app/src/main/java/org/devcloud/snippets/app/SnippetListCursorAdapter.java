@@ -2,11 +2,15 @@ package org.devcloud.snippets.app;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.ParseException;
 
 import static org.devcloud.snippets.app.BuildConfig.DEBUG;
 
@@ -54,15 +58,21 @@ class SnippetListCursorAdapter extends CursorAdapter {
    */
   @Override
   public void bindView(View view, Context context, Cursor cursor) {
-    TextView list_item_text = (TextView) view.findViewById(R.id.list_text);
-    list_item_text.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_TEXT)));
+    try {
+      TextView list_item_text = (TextView) view.findViewById(R.id.list_text);
+      list_item_text.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_TEXT)));
 
-    TextView list_item_date = (TextView) view.findViewById(R.id.date);
-    list_item_date.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_DATE)));
+      TextView list_item_date = (TextView) view.findViewById(R.id.date);
+      String date_text = cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_DATE));
+      DateFormat df = DateFormat.getDateTimeInstance();
+      list_item_date.setText(df.format(DatabaseHelper.parseDate(date_text)));
 
-    if (DEBUG) {
-      TextView list_item_user = (TextView) view.findViewById(R.id.user);
-      list_item_user.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_USERID)));
+      if (DEBUG) {
+        TextView list_item_user = (TextView) view.findViewById(R.id.user);
+        list_item_user.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_USERID)));
+      }
+    } catch (ParseException e) {
+      Log.e(TAG, e.getMessage(), e);
     }
   }
 }
