@@ -59,8 +59,6 @@ public class MainActivity extends FragmentActivity {
    * @param view
    */
   public void saveMessage(View view) {
-    SnippetListFragment list = (SnippetListFragment) getSupportFragmentManager().findFragmentById(list_fragment_id);
-
     // Get the text.
     EditText editText = (EditText) findViewById(R.id.edit_message);
 
@@ -75,6 +73,7 @@ public class MainActivity extends FragmentActivity {
 
         // Reload view
         editText.setText("");
+        SnippetListFragment list = (SnippetListFragment) getSupportFragmentManager().findFragmentById(list_fragment_id);
         if (list != null && context != null) {
           list.refresh(context);
         } else {
