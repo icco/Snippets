@@ -10,6 +10,10 @@ import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.plus.Plus;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+
 /**
  * Class with common utilities and constants needed across the app.
  */
@@ -59,5 +63,21 @@ public class Const {
     SharedPreferences.Editor editor = prefs.edit();
     editor.remove(USER_ID_PREF_STRING);
     editor.commit();
+  }
+
+  /**
+   * @param route URI path to hit starting with a /.
+   */
+  static String getServerUrl(String route) throws MalformedURLException, URISyntaxException {
+    String host;
+    URI url;
+    if (BuildConfig.DEBUG) {
+      host = "https://snippets-app-api-test.herokuapp.com";
+    } else {
+      host = "https://snippets-app-api.herokuapp.com";
+    }
+
+    url = new URI(host + route);
+    return url.toURL().toString();
   }
 }

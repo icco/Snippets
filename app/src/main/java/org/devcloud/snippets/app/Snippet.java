@@ -7,7 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.provider.Settings;
 import android.util.Log;
 
-import org.json.JSONArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.annotations.Expose;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -38,10 +42,18 @@ public class Snippet {
       COLUMN_NAME_UUID
   };
 
+  @Expose
   private String text;
+
+  @Expose
   private Date created;
+
+  @Expose
   private String userId;
+
   private long id;
+
+  @Expose
   private String uuid;
 
   public Snippet(String msg, String userId) {
@@ -51,7 +63,7 @@ public class Snippet {
 
     this.getUuid(); // Just to make sure there is one.
 
-    Log.i(TAG, "Snippet instantiated: " + this.toString());
+    Log.v(TAG, "Snippet instantiated: " + this.toString());
   }
 
   public Snippet(String msg) {
@@ -98,7 +110,7 @@ public class Snippet {
       Log.e(TAG, e.getMessage(), e);
     }
 
-    Log.v(TAG, "Built array: " + snips.toString());
+    Log.i(TAG, "Built array: " + snips.toString());
     return snips;
   }
 
@@ -143,6 +155,12 @@ public class Snippet {
 
       return snips.get(0);
     }
+  }
+
+  static String getJsonArrayForAll(Context context) {
+    Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    ArrayList<Snippet> snips = Snippet.getArrayListForAll(context);
+    return gson.toJson(snips);
   }
 
   public String getUuid() {
@@ -216,11 +234,11 @@ public class Snippet {
     this.setId(db.insert(this.TABLE_NAME, "", values));
 
     // Send a SyncTask to the server.
-    JSONArray json = new JSONArray(Snippet.getArrayListForAll(context));
     HashMap<String, String> map = new HashMap<String, String>(1);
-    map.put("snippet_data", json.toString());
+    map.put("snippet_data", Snippet.getJsonArrayForAll(context));
     new SyncTask().execute(map);
 
+    // Return Snippet _id
     return this.getId();
   }
 
