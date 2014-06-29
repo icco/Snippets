@@ -71,6 +71,9 @@ class SnippetListCursorAdapter extends CursorAdapter {
       if (DEBUG) {
         TextView list_item_user = (TextView) view.findViewById(R.id.user);
         list_item_user.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_USERID)));
+      } else {
+        TextView list_item_user = (TextView) view.findViewById(R.id.user);
+        list_item_user.setText(cursor.getString(cursor.getColumnIndex(Snippet.COLUMN_NAME_UUID)));
       }
     } catch (ParseException e) {
       Log.e(TAG, e.getMessage(), e);
