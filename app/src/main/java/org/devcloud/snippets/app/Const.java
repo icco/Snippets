@@ -1,5 +1,6 @@
 package org.devcloud.snippets.app;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -53,18 +54,16 @@ public class Const {
     return prefs.getString(USER_ID_PREF_STRING, "");
   }
 
+  @SuppressLint("CommitPrefEdits")
   static void setUserId(Context context, String user_id) {
     SharedPreferences prefs = Const.getPreferences(context);
-    SharedPreferences.Editor editor = prefs.edit();
-    editor.putString(USER_ID_PREF_STRING, user_id);
-    editor.apply();
+    prefs.edit().putString(USER_ID_PREF_STRING, user_id).apply();
   }
 
+  @SuppressLint("CommitPrefEdits")
   public static void deleteUserId(Context context) {
     SharedPreferences prefs = Const.getPreferences(context);
-    SharedPreferences.Editor editor = prefs.edit();
-    editor.remove(USER_ID_PREF_STRING);
-    editor.apply();
+    prefs.edit().remove(USER_ID_PREF_STRING).apply();
   }
 
   /**

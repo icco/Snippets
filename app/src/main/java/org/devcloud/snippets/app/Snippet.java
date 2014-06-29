@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.util.Log;
+import android.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -216,6 +217,7 @@ public class Snippet {
     this.created = created;
   }
 
+  @SuppressWarnings("unchecked")
   public long save(Context context) throws IOException {
     DatabaseHelper mDbHelper = new DatabaseHelper(context);
 
@@ -236,9 +238,9 @@ public class Snippet {
     this.setId(db.insert(TABLE_NAME, "", values));
 
     // Send a SyncTask to the server.
-    HashMap<String, String> map = new HashMap<String, String>(1);
-    map.put("snippet_data", Snippet.getJsonArrayForAll(context));
-    AsyncTask<HashMap<String, String>, Void, ArrayList<Snippet>> execute = new SyncTask().execute(map);
+    Pair<String, String> map = new Pair<String, String>("snippet_data", Snippet.getJsonArrayForAll(context));
+    SyncTask task = new SyncTask();
+    task.execute(map);
 
     // Return Snippet _id
     return this.getId();

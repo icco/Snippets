@@ -2,6 +2,7 @@ package org.devcloud.snippets.app;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -21,15 +22,12 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class SyncTask extends AsyncTask<HashMap<String, String>, Void, ArrayList<Snippet>> {
+public class SyncTask extends AsyncTask<Pair<String, String>, Void, ArrayList<Snippet>> {
   private static final String TAG = "SyncTask";
 
-  @Override
-  protected ArrayList<Snippet> doInBackground(HashMap<String, String>... params) {
+  @Override protected ArrayList<Snippet> doInBackground(Pair<String, String>... params) {
     String result_string = "[]";
     ArrayList<Snippet> ret = new ArrayList<Snippet>();
 
@@ -39,11 +37,9 @@ public class SyncTask extends AsyncTask<HashMap<String, String>, Void, ArrayList
 
       // Join the hash-maps into a single list
       List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-      for (HashMap<String, String> map : params) {
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-          Log.i(TAG, String.format("Setting \"%s\" => \"%s\"", entry.getKey(), entry.getValue()));
-          nameValuePairs.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-        }
+      for (Pair<String, String> pair : params) {
+        Log.i(TAG, String.format("Setting \"%s\" => \"%s\"", pair.first, pair.second));
+        nameValuePairs.add(new BasicNameValuePair(pair.first, pair.second));
       }
       httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 

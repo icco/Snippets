@@ -124,12 +124,10 @@ public class MainActivity extends FragmentActivity {
   }
 
   public void editTextOnTap(View view) {
-    boolean setToEditable = true;
-
     EditText textView = (EditText) view.findViewById(R.id.edit_message);
 
-    textView.setFocusableInTouchMode(setToEditable);
-    textView.setFocusable(setToEditable);
+    textView.setFocusableInTouchMode(true);
+    textView.setFocusable(true);
 
     InputMethodManager imm = (InputMethodManager) view.getContext().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
     imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
