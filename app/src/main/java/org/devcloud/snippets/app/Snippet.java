@@ -81,7 +81,8 @@ public class Snippet {
 
 
     String[] empty = {};
-    Cursor cursor = db.query(
+
+    return db.query(
         TABLE_NAME,
         COLUMNS,
         "",
@@ -91,8 +92,6 @@ public class Snippet {
         "",
         COLUMN_NAME_DATE + " DESC"
     );
-
-    return cursor;
   }
 
   static ArrayList<Snippet> getArrayListForAll(Context context) {
@@ -228,12 +227,12 @@ public class Snippet {
 
     // Create a new map of values, where column names are the keys
     ContentValues values = new ContentValues();
-    values.put(this.COLUMN_NAME_TEXT, this.getText());
-    values.put(this.COLUMN_NAME_DATE, DatabaseHelper.fmtDate(this.getCreated()));
-    values.put(this.COLUMN_NAME_USERID, this.getUserId());
+    values.put(COLUMN_NAME_TEXT, this.getText());
+    values.put(COLUMN_NAME_DATE, DatabaseHelper.fmtDate(this.getCreated()));
+    values.put(COLUMN_NAME_USERID, this.getUserId());
 
     // Insert the new row, returning the primary key value of the new row
-    this.setId(db.insert(this.TABLE_NAME, "", values));
+    this.setId(db.insert(TABLE_NAME, "", values));
 
     // Send a SyncTask to the server.
     HashMap<String, String> map = new HashMap<String, String>(1);
