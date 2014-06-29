@@ -14,8 +14,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -73,7 +71,7 @@ public class SyncTask extends AsyncTask<HashMap<String, String>, Void, ArrayList
       Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
       ArrayList parsed = gson.fromJson(result_string, ArrayList.class);
       for (Object i : parsed) {
-       Log.d(TAG, "Parsed had: " + i.toString());
+        Log.d(TAG, "Parsed had: " + i.toString());
       }
     } catch (ClientProtocolException e) {
       Log.e(TAG, e.getMessage(), e);

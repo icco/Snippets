@@ -163,12 +163,14 @@ public abstract class PlusBaseActivity extends FragmentActivity
       // Revoke access to this entire application. This will call back to
       // onAccessRevoked when it is complete, as it needs to reach the Google
       // authentication servers to revoke all tokens.
-      mPlusClient.revokeAccessAndDisconnect(new PlusClient.OnAccessRevokedListener() {
-        public void onAccessRevoked(ConnectionResult result) {
-          updateConnectButtonState();
-          onPlusClientRevokeAccess();
-        }
-      });
+      mPlusClient.revokeAccessAndDisconnect(
+          new PlusClient.OnAccessRevokedListener() {
+            public void onAccessRevoked(ConnectionResult result) {
+              updateConnectButtonState();
+              onPlusClientRevokeAccess();
+            }
+          }
+      );
     }
 
   }

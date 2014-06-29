@@ -30,7 +30,8 @@ public class SnippetListFragment extends ListFragment {
       snippet_list = new SnippetListCursorAdapter(
           inflater.getContext(),
           Snippet.getCursorForAll(inflater.getContext()),
-          true);
+          true
+      );
       setListAdapter(snippet_list);
     } catch (IOException e) {
       Log.e(TAG, "Problem loading data from DB.", e);

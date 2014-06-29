@@ -9,8 +9,6 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.Expose;
 
 import java.io.IOException;
@@ -91,7 +89,8 @@ public class Snippet {
         ,
         "",
         "",
-        COLUMN_NAME_DATE + " DESC");
+        COLUMN_NAME_DATE + " DESC"
+    );
 
     return cursor;
   }
@@ -165,10 +164,13 @@ public class Snippet {
 
   public String getUuid() {
     if (uuid == null || uuid.equals("")) {
-      setUuid(String.format("%s.%s",
-          Settings.Secure.ANDROID_ID,
-          UUID.randomUUID().toString()
-      ));
+      setUuid(
+          String.format(
+              "%s.%s",
+              Settings.Secure.ANDROID_ID,
+              UUID.randomUUID().toString()
+          )
+      );
     }
 
     return uuid;

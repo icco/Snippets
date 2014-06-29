@@ -34,15 +34,17 @@ class DatabaseHelper extends SQLiteOpenHelper {
   }
 
   public void onCreate(SQLiteDatabase db) {
-    db.execSQL(String.format(
-        "CREATE TABLE %s (%s INT PRIMARY KEY, %s %s NOT NULL, %s %s NOT NULL, %s %s NOT NULL, %s %s NOT NULL)",
-        Snippet.TABLE_NAME,
-        Snippet.COLUMN_NAME_ID,
-        Snippet.COLUMN_NAME_TEXT, Snippet.COLUMN_TYPE_TEXT,
-        Snippet.COLUMN_NAME_DATE, Snippet.COLUMN_TYPE_DATE,
-        Snippet.COLUMN_NAME_USERID, Snippet.COLUMN_TYPE_USERID,
-        Snippet.COLUMN_NAME_UUID, Snippet.COLUMN_TYPE_UUID
-    ));
+    db.execSQL(
+        String.format(
+            "CREATE TABLE %s (%s INT PRIMARY KEY, %s %s NOT NULL, %s %s NOT NULL, %s %s NOT NULL, %s %s NOT NULL)",
+            Snippet.TABLE_NAME,
+            Snippet.COLUMN_NAME_ID,
+            Snippet.COLUMN_NAME_TEXT, Snippet.COLUMN_TYPE_TEXT,
+            Snippet.COLUMN_NAME_DATE, Snippet.COLUMN_TYPE_DATE,
+            Snippet.COLUMN_NAME_USERID, Snippet.COLUMN_TYPE_USERID,
+            Snippet.COLUMN_NAME_UUID, Snippet.COLUMN_TYPE_UUID
+        )
+    );
   }
 
   public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
