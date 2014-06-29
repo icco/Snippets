@@ -26,7 +26,7 @@ public class Const {
   static GoogleApiClient getGoogleApiClient(Activity activity) {
     GoogleApiClient.Builder client_builder = new GoogleApiClient.Builder(activity);
 
-    client_builder.addApi(Plus.API, null);
+    client_builder.addApi(Plus.API, Plus.PlusOptions.builder().build());
     client_builder.addScope(Plus.SCOPE_PLUS_LOGIN);
 
     if (activity instanceof ConnectionCallbacks) {

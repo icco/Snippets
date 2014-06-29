@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import java.io.IOException;
 
-
 public class MainActivity extends FragmentActivity {
 
   static final String SIGN_OUT_MESSAGE = "SIGN_OUT";
