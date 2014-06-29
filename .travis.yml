@@ -6,6 +6,11 @@ env:
   matrix:
       - ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a
 
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
 android:
   components:
       - build-tools-19.1.0
