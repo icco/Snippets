@@ -11,7 +11,7 @@
 
   <item
       android:id="@+id/sign_out"
-      android:title="Sign Out"
+      android:title="@string/sign_out"
       android:orderInCategory="2"
       android:onClick="signOutMenuItem"
       />

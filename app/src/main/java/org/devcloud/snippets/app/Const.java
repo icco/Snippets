@@ -57,14 +57,14 @@ public class Const {
     SharedPreferences prefs = Const.getPreferences(context);
     SharedPreferences.Editor editor = prefs.edit();
     editor.putString(USER_ID_PREF_STRING, user_id);
-    editor.commit();
+    editor.apply();
   }
 
   public static void deleteUserId(Context context) {
     SharedPreferences prefs = Const.getPreferences(context);
     SharedPreferences.Editor editor = prefs.edit();
     editor.remove(USER_ID_PREF_STRING);
-    editor.commit();
+    editor.apply();
   }
 
   /**
