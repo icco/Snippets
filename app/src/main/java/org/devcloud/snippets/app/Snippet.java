@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -237,7 +238,7 @@ public class Snippet {
     // Send a SyncTask to the server.
     HashMap<String, String> map = new HashMap<String, String>(1);
     map.put("snippet_data", Snippet.getJsonArrayForAll(context));
-    new SyncTask().execute(map);
+    AsyncTask<HashMap<String, String>, Void, ArrayList<Snippet>> execute = new SyncTask().execute(map);
 
     // Return Snippet _id
     return this.getId();

@@ -21,7 +21,7 @@ class SnippetListCursorAdapter extends CursorAdapter {
 
   /**
    * Constructor that allows control over auto-requery.  It is recommended
-   * you not use this, but instead {@link #CursorAdapter(android.content.Context, android.database.Cursor, int)}.
+   * you not use this, but instead {@link android.widget.CursorAdapter(android.content.Context, android.database.Cursor, int)}.
    * When using this constructor, {@link #FLAG_REGISTER_CONTENT_OBSERVER}
    * will always be set.
    *

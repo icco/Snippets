@@ -34,7 +34,7 @@ public class LoggedOutActivity extends PlusBaseActivity {
       signOut();
     } else {
       String person = getPlusClient().getAccountName();
-      Log.w(TAG, "Logged in: " + person.toString());
+      Log.w(TAG, String.format("Logged in: %s", person));
       Const.setUserId(this.getApplicationContext(), person);
       intent = new Intent(this, MainActivity.class);
       startActivity(intent);

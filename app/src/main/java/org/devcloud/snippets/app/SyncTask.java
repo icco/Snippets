@@ -25,9 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by nat on 4/8/14.
- */
 public class SyncTask extends AsyncTask<HashMap<String, String>, Void, ArrayList<Snippet>> {
   private static final String TAG = "SyncTask";
 
@@ -55,10 +52,10 @@ public class SyncTask extends AsyncTask<HashMap<String, String>, Void, ArrayList
       if (response.getStatusLine().getStatusCode() == 200) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "iso-8859-1"), 8);
         StringBuilder sb = new StringBuilder();
-        sb.append(reader.readLine() + "\n");
+        sb.append(reader.readLine()).append("\n");
         String line = "0";
         while ((line = reader.readLine()) != null) {
-          sb.append(line + "\n");
+          sb.append(line).append("\n");
         }
         reader.close();
         result_string = sb.toString();
