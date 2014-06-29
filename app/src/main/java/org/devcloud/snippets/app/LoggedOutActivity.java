@@ -10,7 +10,7 @@ public class LoggedOutActivity extends PlusBaseActivity {
   private static final String TAG = "LoggedOutActivity";
 
   /**
-   * Called when the {@link PlusClient} revokes access to this app.
+   * Called when the {@link com.google.android.gms.plus.PlusClient} revokes access to this app.
    */
   @Override
   protected void onPlusClientRevokeAccess() {
@@ -22,6 +22,10 @@ public class LoggedOutActivity extends PlusBaseActivity {
    */
   @Override
   protected void onPlusClientSignIn() {
+    if (!Const.isNetworkAvailable(this.getApplicationContext())) {
+      Log.w(TAG, "No internet connection.");
+    }
+
     Intent intent = getIntent();
     if (intent != null && intent.getBooleanExtra(MainActivity.SIGN_OUT_MESSAGE, false)) {
       getPlusClient().clearDefaultAccount();
@@ -38,7 +42,7 @@ public class LoggedOutActivity extends PlusBaseActivity {
   }
 
   /**
-   * Called when the {@link PlusClient} is disconnected.
+   * Called when the {@link com.google.android.gms.plus.PlusClient} is disconnected.
    */
   @Override
   protected void onPlusClientSignOut() {
@@ -48,7 +52,7 @@ public class LoggedOutActivity extends PlusBaseActivity {
   }
 
   /**
-   * Called when the {@link PlusClient} is blocking the UI.  If you have a progress bar widget,
+   * Called when the {@link com.google.android.gms.plus.PlusClient} is blocking the UI.  If you have a progress bar widget,
    * this tells you when to show or hide it.
    *
    * @param show

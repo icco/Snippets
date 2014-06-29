@@ -3,6 +3,8 @@ package org.devcloud.snippets.app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -79,5 +81,18 @@ public class Const {
 
     url = new URI(host + route);
     return url.toURL().toString();
+  }
+
+  /**
+   * Tell us if we have any internet connection.
+   *
+   * @param context Current context.
+   *
+   * @return Whether or not we have a network connection.
+   */
+  static boolean isNetworkAvailable(Context context) {
+    ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo ni = cm.getActiveNetworkInfo();
+    return ni != null && ni.isConnected();
   }
 }
