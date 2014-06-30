@@ -233,6 +233,7 @@ public class Snippet {
     values.put(COLUMN_NAME_TEXT, this.getText());
     values.put(COLUMN_NAME_DATE, DatabaseHelper.fmtDate(this.getCreated()));
     values.put(COLUMN_NAME_USERID, this.getUserId());
+    values.put(COLUMN_NAME_UUID, this.getUuid());
 
     // Insert the new row, returning the primary key value of the new row
     this.setId(db.insert(TABLE_NAME, "", values));
