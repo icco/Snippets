@@ -239,9 +239,13 @@ public class Snippet {
     this.setId(db.insert(TABLE_NAME, "", values));
 
     // Send a SyncTask to the server.
-    Pair<String, String> map = new Pair<String, String>("snippet_data", Snippet.getJsonArrayForAll(context));
-    SyncTask task = new SyncTask();
-    task.execute(map);
+    if (Const.isNetworkAvailable(context)) {
+      Pair<String, String> map = new Pair<String, String>("snippet_data", Snippet.getJsonArrayForAll(context));
+      SyncTask task = new SyncTask();
+      task.execute(map);
+    } else {
+      Log.i(TAG, "Not connected to network.");
+    }
 
     // Return Snippet _id
     return this.getId();

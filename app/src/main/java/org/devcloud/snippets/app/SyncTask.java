@@ -68,12 +68,16 @@ public class SyncTask extends AsyncTask<Pair<String, String>, Void, ArrayList<Sn
       }
     } catch (ClientProtocolException e) {
       Log.e(TAG, e.getMessage(), e);
+      ret = null;
     } catch (UnsupportedEncodingException e) {
       Log.e(TAG, e.getMessage(), e);
+      ret = null;
     } catch (IOException e) {
       Log.e(TAG, e.getMessage(), e);
+      ret = null;
     } catch (URISyntaxException e) {
       Log.e(TAG, e.getMessage(), e);
+      ret = null;
     }
 
     return ret;
