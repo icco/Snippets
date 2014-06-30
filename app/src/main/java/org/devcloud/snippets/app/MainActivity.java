@@ -18,8 +18,7 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 
 import java.io.IOException;
 
-public class MainActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
-    GooglePlayServicesClient.OnConnectionFailedListener {
+public class MainActivity extends FragmentActivity {
 
   static final String SIGN_OUT_MESSAGE = "SIGN_OUT";
   private static final String TAG = "MainActivity";
@@ -147,20 +146,5 @@ public class MainActivity extends FragmentActivity implements GooglePlayServices
     } catch (NullPointerException e) {
       Log.e(TAG, e.getMessage(), e);
     }
-  }
-
-  @Override
-  public void onConnected(Bundle bundle) {
-
-  }
-
-  @Override
-  public void onDisconnected() {
-
-  }
-
-  @Override
-  public void onConnectionFailed(ConnectionResult connectionResult) {
-
   }
 }
