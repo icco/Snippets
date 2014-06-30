@@ -13,9 +13,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+
 import java.io.IOException;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
+    GooglePlayServicesClient.OnConnectionFailedListener {
 
   static final String SIGN_OUT_MESSAGE = "SIGN_OUT";
   private static final String TAG = "MainActivity";
@@ -143,5 +147,20 @@ public class MainActivity extends FragmentActivity {
     } catch (NullPointerException e) {
       Log.e(TAG, e.getMessage(), e);
     }
+  }
+
+  @Override
+  public void onConnected(Bundle bundle) {
+
+  }
+
+  @Override
+  public void onDisconnected() {
+
+  }
+
+  @Override
+  public void onConnectionFailed(ConnectionResult connectionResult) {
+
   }
 }
