@@ -29,6 +29,18 @@ public class LoggedOutActivity extends FragmentActivity
     startActivityForResult(intent, SIGN_IN_REQUEST_CODE);
   }
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_logged_out);
+
+    Intent intent = getIntent();
+    if (intent != null && intent.getBooleanExtra(MainActivity.SIGN_OUT_MESSAGE, false)) {
+      Log.i(TAG, "Got log out intent.");
+      Const.deleteUserId(this.getApplicationContext());
+    }
+  }
+
   protected void onActivityResult(
       final int requestCode, final int resultCode,
       final Intent data
