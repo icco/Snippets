@@ -4,6 +4,13 @@ android {
   compileSdkVersion 19
   buildToolsVersion '19.1'
 
+  sourceSets {
+    androidTest {
+      java.srcDirs = ['test/java']
+      androidTest.setRoot('instrumentTest')
+    }
+  }
+
   defaultConfig {
     minSdkVersion 14
     targetSdkVersion 19
