@@ -7,7 +7,7 @@ android {
   sourceSets {
     androidTest {
       java.srcDirs = ['test/java']
-      androidTest.setRoot('instrumentTest')
+      androidTest.setRoot('test')
     }
   }
 
@@ -43,7 +43,7 @@ android {
 }
 
 dependencies {
-    //noinspection GradleDependency,GradleDependency,GradleDependency
+    //noinspection GradleDependency
     compile 'com.android.support:support-v4:19.+'
     compile 'com.google.android.gms:play-services:+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
