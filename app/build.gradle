@@ -4,16 +4,11 @@ android {
   compileSdkVersion 19
   buildToolsVersion '19.1'
 
-  sourceSets {
-    androidTest {
-      java.srcDirs = ['test/java']
-      androidTest.setRoot('test')
-    }
-  }
-
   defaultConfig {
     minSdkVersion 14
     targetSdkVersion 19
+    applicationId "org.devcloud.snippets"
+    testApplicationId "org.devcloud.snippets.test"
 
     versionCode 10
     versionName "v1.0.10"
