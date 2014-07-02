@@ -24,27 +24,6 @@ public class Const {
   private static final String TAG = "Const";
   private static final String USER_ID_PREF_STRING = "user_id";
 
-  static GoogleApiClient getGoogleApiClient(Activity activity) {
-    GoogleApiClient.Builder client_builder = new GoogleApiClient.Builder(activity);
-
-    client_builder.addApi(Plus.API, Plus.PlusOptions.builder().build());
-    client_builder.addScope(Plus.SCOPE_PLUS_LOGIN);
-
-    if (activity instanceof ConnectionCallbacks) {
-      client_builder.addConnectionCallbacks((ConnectionCallbacks) activity);
-    } else {
-      Log.w(TAG, "Activity should implement ConnectionCallbacks");
-    }
-
-    if (activity instanceof OnConnectionFailedListener) {
-      client_builder.addOnConnectionFailedListener((OnConnectionFailedListener) activity);
-    } else {
-      Log.w(TAG, "Activity should implement OnConnectionFailedListener");
-    }
-
-    return client_builder.build();
-  }
-
   static SharedPreferences getPreferences(Context context) {
     return context.getSharedPreferences("snippets_preferences", Context.MODE_PRIVATE);
   }
