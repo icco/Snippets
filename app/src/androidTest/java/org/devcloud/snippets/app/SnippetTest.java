@@ -1,20 +1,18 @@
 package org.devcloud.snippets.app;
 
-import junit.framework.TestCase;
+import android.test.AndroidTestCase;
 
-public class SnippetTest extends TestCase {
+import java.util.ArrayList;
+
+public class SnippetTest extends AndroidTestCase {
 
   public void setUp() throws Exception {
     super.setUp();
-
-  }
-
-  public void testGetCursorForAll() throws Exception {
-
   }
 
   public void testGetArrayListForAll() throws Exception {
-
+    ArrayList<Snippet> snippets = Snippet.getArrayListForAll(this.getContext());
+    assertEquals(new ArrayList<Snippet>(), snippets);
   }
 
   public void testFindByUUID() throws Exception {

@@ -70,6 +70,13 @@ public class Snippet {
     throw new UnsupportedOperationException("Not yet implemented.");
   }
 
+  /**
+   * Given an Android context, returns an iterator for the database.
+   *
+   * @param context Android context.
+   * @return Cursor for iteration.
+   * @throws IOException
+   */
   public static Cursor getCursorForAll(Context context) throws IOException {
     DatabaseHelper mDbHelper = new DatabaseHelper(context);
     ArrayList<Snippet> list = new ArrayList<Snippet>();
@@ -96,7 +103,7 @@ public class Snippet {
     );
   }
 
-  static ArrayList<Snippet> getArrayListForAll(Context context) {
+  public static ArrayList<Snippet> getArrayListForAll(Context context) {
     ArrayList<Snippet> snips = new ArrayList<Snippet>();
 
     try {
