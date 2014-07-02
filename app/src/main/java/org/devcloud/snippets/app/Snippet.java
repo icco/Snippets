@@ -144,7 +144,37 @@ public class Snippet {
     Cursor cursor = db.query(
         Snippet.TABLE_NAME,
         COLUMNS,
-        "uuid = ?",
+        COLUMN_NAME_UUID + " = ?",
+        params,
+        "", // Group By
+        "", // Having
+        "", // Order By
+        "1" // Limit
+    );
+
+    if (cursor.getCount() == 0) {
+      return null;
+    } else {
+      ArrayList<Snippet> snips = new ArrayList<Snippet>(cursor.getCount());
+      for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+        snips.add(buildFromCursorRow(cursor));
+      }
+
+      return snips.get(0);
+    }
+  }
+
+  public static Snippet findByID(long id, Context context) {
+    DatabaseHelper mDbHelper = new DatabaseHelper(context);
+    SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+    assert db != null;
+
+    String[] params = {Long.toString(id)};
+    Cursor cursor = db.query(
+        Snippet.TABLE_NAME,
+        COLUMNS,
+        COLUMN_NAME_ID + " = ?",
         params,
         "", // Group By
         "", // Having
