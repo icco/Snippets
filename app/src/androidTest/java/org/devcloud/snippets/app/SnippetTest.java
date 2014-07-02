@@ -37,6 +37,7 @@ public class SnippetTest extends AndroidTestCase {
     s.setId(id);
     Snippet get = Snippet.findByID(id, getContext());
 
+    assertTrue(id > 0);
     assertEquals(s, get);
   }
 }
