@@ -17,3 +17,7 @@ To join my faithful group of Alpha Testers, do the following:
  3. Install the app!
 
 Note: I value security highly, so I'll try and keep everything secure. One thing I can't promise on Alpha builds is data integrity. I am running daily backups of the database, but I can totally see everything breaking and you losing a few posts.
+
+## Release
+
+ * `./gradlew assembleRelease && cp app/build/outputs/apk/app-release.apk ~/Desktop/; ./gradlew clean`
