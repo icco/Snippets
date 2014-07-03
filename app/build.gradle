@@ -7,7 +7,7 @@ android {
   defaultConfig {
     minSdkVersion 14
     targetSdkVersion 19
-    applicationId "org.devcloud.snippets"
+    applicationId "org.devcloud.snippets.app"
     testApplicationId "org.devcloud.snippets.test"
 
     versionCode 11
