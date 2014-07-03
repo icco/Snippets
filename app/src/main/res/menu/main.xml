@@ -3,6 +3,12 @@
       tools:context="org.devcloud.snippets.app.MainActivity">
 
   <item
+      android:id="@+id/action_about"
+      android:title="@string/app_name"
+      android:orderInCategory="0"
+      android:onClick="aboutMenuItem"/>
+
+    <item
       android:id="@+id/action_settings"
       android:title="@string/action_settings"
       android:orderInCategory="1"

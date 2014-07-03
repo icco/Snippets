@@ -147,4 +147,12 @@ public class MainActivity extends FragmentActivity {
       Log.e(TAG, e.getMessage(), e);
     }
   }
+
+  @Override
+  public boolean onPrepareOptionsMenu(Menu menu) {
+    boolean ret = super.onPrepareOptionsMenu(menu);
+    MenuItem about_menu_item = menu.findItem(R.id.action_about);
+    about_menu_item.setTitle(String.format("%s %s", getString(R.string.app_name), BuildConfig.VERSION_NAME));
+    return ret;
+  }
 }
