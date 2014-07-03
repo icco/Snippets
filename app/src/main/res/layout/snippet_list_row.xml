@@ -2,49 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingBottom="10dp"
+                android:clickable="true"
                 android:onClick="closeKeyboard"
-                android:clickable="true">
+                android:paddingBottom="10dp">
 
-  <TextView
-      android:id="@+id/list_text"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:layout_margin="10dp"
-      android:text="@string/ellipsis"
-      android:textColor="#080813"
-      android:textSize="15sp"
-      android:autoLink="phone|email|web"
-      android:clickable="true"
-      android:focusable="true"
-      android:linksClickable="true"
-      android:textIsSelectable="true"/>
+    <TextView
+        android:id="@+id/list_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:autoLink="phone|email|web"
+        android:clickable="true"
+        android:focusable="true"
+        android:linksClickable="true"
+        android:text="@string/ellipsis"
+        android:textColor="#080813"
+        android:textIsSelectable="true"
+        android:textSize="15sp"/>
 
-  <TextView
-      android:id="@+id/date"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/list_text"
-      android:layout_alignRight="@+id/list_text"
-      android:layout_alignEnd="@+id/list_text"
-      android:paddingEnd="10dp"
-      android:textColor="#373d4a"
-      android:singleLine="true"
-      android:text="@string/ellipsis"
-      android:layout_marginRight="10dp"
-      android:paddingBottom="10dp"/>
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/list_text"
+        android:layout_alignRight="@+id/list_text"
+        android:layout_below="@+id/list_text"
+        android:layout_marginRight="10dp"
+        android:paddingBottom="10dp"
+        android:paddingEnd="10dp"
+        android:singleLine="true"
+        android:text="@string/ellipsis"
+        android:textColor="#373d4a"/>
 
-  <TextView
-      android:id="@+id/user"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:paddingEnd="10dp"
-      android:textColor="#373d4a"
-      android:singleLine="true"
-      android:text=""
-      android:paddingBottom="10dp"
-      android:layout_alignTop="@+id/date"
-      android:layout_alignLeft="@+id/list_text"
-      android:layout_alignStart="@+id/list_text"/>
+    <TextView
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/list_text"
+        android:layout_alignStart="@+id/list_text"
+        android:layout_alignTop="@+id/date"
+        android:paddingBottom="10dp"
+        android:paddingEnd="10dp"
+        android:singleLine="true"
+        android:text=""
+        android:textColor="#373d4a"/>
 </RelativeLayout>
 

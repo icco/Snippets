@@ -5,11 +5,11 @@
              tools:context="org.devcloud.snippets.app.MainActivity"
              tools:ignore="MergeRootFrame">
 
-  <LinearLayout
-      android:id="@+id/container"
-      android:orientation="vertical"
-      android:layout_width="fill_parent"
-      android:layout_height="fill_parent"
-      android:layout_gravity="center_horizontal|top">
-  </LinearLayout>
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal|top"
+        android:orientation="vertical">
+    </LinearLayout>
 </FrameLayout>

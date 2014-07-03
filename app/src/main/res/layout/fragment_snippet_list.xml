@@ -1,24 +1,24 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:baselineAligned="false">
+    android:baselineAligned="false"
+    android:orientation="horizontal">
 
-  <ListView
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:id="@android:id/list"
-      android:layout_weight="1"/>
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
 
-  <TextView
-      android:id="@id/android:empty"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:background="@android:color/holo_blue_dark"
-      android:text="@string/empty_list"
-      android:padding="20sp"
-      android:typeface="monospace"
-      android:textColor="@android:color/primary_text_dark_nodisable"
-      android:textSize="20sp"/>
+    <TextView
+        android:id="@id/android:empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_dark"
+        android:padding="20sp"
+        android:text="@string/empty_list"
+        android:textColor="@android:color/primary_text_dark_nodisable"
+        android:textSize="20sp"
+        android:typeface="monospace"/>
 </LinearLayout>

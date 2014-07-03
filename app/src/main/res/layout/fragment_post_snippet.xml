@@ -1,38 +1,38 @@
 <RelativeLayout
+    android:id="@+id/linearLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:layout_centerHorizontal="true"
     android:layout_alignParentTop="true"
-    android:id="@+id/linearLayout"
+    android:layout_centerHorizontal="true"
     android:orientation="vertical">
 
-  <EditText
-      android:layout_width="match_parent"
-      android:layout_height="100dp"
-      android:ems="10"
-      android:id="@+id/edit_message"
-      android:typeface="serif"
-      android:width="@dimen/activity_horizontal_margin"
-      android:layout_toLeftOf="@+id/button"
-      android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
-      android:textIsSelectable="true"
-      android:hint="@string/hint_text"
-      android:focusable="true"
-      android:gravity="top"
-      android:focusableInTouchMode="true"
-      android:enabled="true"
-      android:longClickable="true"
-      android:onClick="editTextOnTap"
-      android:clickable="false"/>
+    <EditText
+        android:id="@+id/edit_message"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_toLeftOf="@+id/button"
+        android:width="@dimen/activity_horizontal_margin"
+        android:clickable="false"
+        android:ems="10"
+        android:enabled="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="top"
+        android:hint="@string/hint_text"
+        android:inputType="textMultiLine|textCapSentences|textAutoCorrect"
+        android:longClickable="true"
+        android:onClick="editTextOnTap"
+        android:textIsSelectable="true"
+        android:typeface="serif"/>
 
-  <Button
-      android:layout_width="70dp"
-      android:layout_height="100dp"
-      android:text="@string/button_text"
-      android:id="@+id/button"
-      android:onClick="saveMessage"
-      android:layout_alignParentTop="true"
-      android:layout_alignParentRight="true"
-      android:layout_alignParentEnd="true"/>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:onClick="saveMessage"
+        android:text="@string/button_text"/>
 </RelativeLayout>
