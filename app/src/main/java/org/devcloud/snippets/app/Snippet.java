@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.provider.Settings;
 import android.util.Log;
 import android.util.Pair;
@@ -17,7 +16,6 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.UUID;
 
 public class Snippet {
@@ -74,7 +72,9 @@ public class Snippet {
    * Given an Android context, returns an iterator for the database.
    *
    * @param context Android context.
+   *
    * @return Cursor for iteration.
+   *
    * @throws IOException
    */
   public static Cursor getCursorForAll(Context context) throws IOException {

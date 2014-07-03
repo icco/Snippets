@@ -27,7 +27,8 @@ import java.util.List;
 public class SyncTask extends AsyncTask<Pair<String, String>, Void, ArrayList<Snippet>> {
   private static final String TAG = "SyncTask";
 
-  @Override protected ArrayList<Snippet> doInBackground(Pair<String, String>... params) {
+  @Override
+  protected ArrayList<Snippet> doInBackground(Pair<String, String>... params) {
     String result_string = "[]";
     ArrayList<Snippet> ret = new ArrayList<Snippet>();
 

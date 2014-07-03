@@ -13,9 +13,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient;
-
 import java.io.IOException;
 
 public class MainActivity extends FragmentActivity {
