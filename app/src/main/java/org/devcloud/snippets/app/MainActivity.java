@@ -126,6 +126,12 @@ public class MainActivity extends FragmentActivity {
     toast.show();
   }
 
+  public void aboutMenuItem(MenuItem item) {
+    CharSequence text = "This is not implemented yet.";
+    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+    toast.show();
+  }
+
   public void editTextOnTap(View view) {
     EditText textView = (EditText) view.findViewById(R.id.edit_message);
 

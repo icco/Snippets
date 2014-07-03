@@ -46,6 +46,5 @@
       android:layout_alignTop="@+id/date"
       android:layout_alignLeft="@+id/list_text"
       android:layout_alignStart="@+id/list_text"/>
-
 </RelativeLayout>
 
