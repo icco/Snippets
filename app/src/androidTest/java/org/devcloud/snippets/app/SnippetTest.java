@@ -1,5 +1,6 @@
 package org.devcloud.snippets.app;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
 
@@ -30,12 +31,13 @@ public class SnippetTest extends AndroidTestCase {
   }
 
   public void testSave() throws Exception {
-    DatabaseHelper mDbHelper = new DatabaseHelper(getContext());
+    Context context = getContext();
+    DatabaseHelper mDbHelper = new DatabaseHelper(context);
     SQLiteDatabase db = mDbHelper.getReadableDatabase();
     Snippet s = new Snippet("blah blah blah.", TEST_USER);
-    long id = s.save(getContext());
+    long id = s.save(context);
     s.setId(id);
-    Snippet get = Snippet.findByID(id, getContext());
+    Snippet get = Snippet.findByID(id, context);
 
     assertTrue(id > 0);
     assertEquals(s, get);
