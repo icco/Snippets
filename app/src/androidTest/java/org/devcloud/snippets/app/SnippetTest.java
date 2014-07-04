@@ -1,18 +1,25 @@
 package org.devcloud.snippets.app;
 
+import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.test.ActivityInstrumentationTestCase2;
 import android.test.AndroidTestCase;
+import android.test.ApplicationTestCase;
 
 import java.util.ArrayList;
 
-public class SnippetTest extends AndroidTestCase {
+public class SnippetTest extends ApplicationTestCase<Application> {
   final static String TEST_USER = "fake@fake.com";
   Context context;
 
+  public SnippetTest(Class<Application> applicationClass) {
+    super(applicationClass);
+  }
+
   public void setUp() throws Exception {
     super.setUp();
-    context = getContext();
+    context = getSystemContext();
   }
 
   public void testGetArrayListForAll() throws Exception {
