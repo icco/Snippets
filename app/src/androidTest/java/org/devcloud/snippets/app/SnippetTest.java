@@ -8,13 +8,15 @@ import java.util.ArrayList;
 
 public class SnippetTest extends AndroidTestCase {
   final static String TEST_USER = "fake@fake.com";
+  Context context;
 
   public void setUp() throws Exception {
     super.setUp();
+    context = getContext();
   }
 
   public void testGetArrayListForAll() throws Exception {
-    ArrayList<Snippet> snippets = Snippet.getArrayListForAll(this.getContext());
+    ArrayList<Snippet> snippets = Snippet.getArrayListForAll(context);
     assertEquals(new ArrayList<Snippet>(), snippets);
   }
 
@@ -27,11 +29,19 @@ public class SnippetTest extends AndroidTestCase {
   }
 
   public void testGetUuid() throws Exception {
+    Snippet s = new Snippet("test getUUID", TEST_USER);
+    String gen_uuid = s.getUuid();
+    s.save(context);
 
+    assertEquals(gen_uuid, s.getUuid());
+
+    ArrayList<Snippet> snippets = Snippet.getArrayListForAll(context);
+
+    assertEquals(1, snippets.size());
+    assertEquals(gen_uuid, snippets.get(0).getUuid());
   }
 
   public void testSave() throws Exception {
-    Context context = getContext();
     DatabaseHelper mDbHelper = new DatabaseHelper(context);
     SQLiteDatabase db = mDbHelper.getReadableDatabase();
     Snippet s = new Snippet("blah blah blah.", TEST_USER);
