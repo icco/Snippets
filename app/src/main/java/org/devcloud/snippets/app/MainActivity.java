@@ -23,7 +23,6 @@ public class MainActivity extends FragmentActivity {
   public static final int REQUEST_CODE = 0;
   static final String SIGN_OUT_MESSAGE = "SIGN_OUT";
   private static final String TAG = "MainActivity";
-  private int list_fragment_id;
 
   /**
    * Initial entry point into the class.
@@ -42,53 +41,7 @@ public class MainActivity extends FragmentActivity {
       getSupportFragmentManager().beginTransaction()
           .add(R.id.container, list_fragment)
           .commit();
-
-      // Save ID
-      list_fragment_id = list_fragment.getId();
     }
-  }
-
-  /**
-   * Saves a message stored in an edit text widget.
-   *
-   * @param view
-   */
-  public void saveMessage(View view) {
-    // Get the text.
-    EditText editText = (EditText) findViewById(R.id.edit_message);
-
-    String message = editText.getText().toString();
-    Context context = getApplicationContext();
-
-    try {
-      // Save the text.
-      if (!message.isEmpty()) {
-        Snippet snippet = new Snippet(message, Const.getUserId(context));
-        snippet.save(context);
-
-        // Reload view
-        editText.setText("");
-        SnippetListFragment list = (SnippetListFragment) getSupportFragmentManager().findFragmentById(list_fragment_id);
-        if (list != null && context != null) {
-          list.refresh(context);
-        } else {
-          if (list == null) {
-            Log.e(TAG, "list is null");
-          }
-
-          if (context == null) {
-            Log.e(TAG, "context is null");
-          }
-        }
-      } else {
-        CharSequence text = "Snippets can not be empty.";
-        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
-        toast.show();
-      }
-    } catch (IOException e) {
-      Log.e(TAG, e.getMessage(), e);
-    }
-
   }
 
   @Override

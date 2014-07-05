@@ -1,64 +1,81 @@
 package org.devcloud.snippets.app;
 
-import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import org.devcloud.snippets.app.R;
+import java.io.IOException;
 
-public class NewPostActivity extends Activity {
+public class NewPostActivity extends FragmentActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_post);
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+  private static final String TAG = "NewPostActivity";
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_new_post);
+    if (savedInstanceState == null) {
+      Fragment f = new NewPostFragment();
+      getSupportFragmentManager().beginTransaction()
+          .add(R.id.container, f)
+          .commit();
     }
+  }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.new_post, menu);
-        return true;
+  /**
+   * Saves a message stored in an edit text widget.
+   *
+   * @param view
+   */
+  public void saveMessage(View view) {
+    // Get the text.
+    EditText editText = (EditText) findViewById(R.id.edit_message);
+
+    String message = editText.getText().toString();
+    Context context = getApplicationContext();
+
+    try {
+      // Save the text.
+      if (!message.isEmpty()) {
+        Snippet snippet = new Snippet(message, Const.getUserId(context));
+        snippet.save(context);
+
+       // Intent back to Main.
+      } else {
+        CharSequence text = "Snippets can not be empty.";
+        Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+        toast.show();
+      }
+    } catch (IOException e) {
+      Log.e(TAG, e.getMessage(), e);
     }
+  }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.new_post, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
+    int id = item.getItemId();
+    if (id == R.id.action_settings) {
+      return true;
     }
+    return super.onOptionsItemSelected(item);
+  }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_new_post, container, false);
-            return rootView;
-        }
-    }
 }
