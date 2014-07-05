@@ -51,7 +51,6 @@ public class MainActivity extends FragmentActivity {
     setContentView(R.layout.activity_main);
 
     if (savedInstanceState == null) {
-      // Now we wait for onConnected to be called
       buildUI();
     }
   }
@@ -200,5 +199,11 @@ public class MainActivity extends FragmentActivity {
     MenuItem about_menu_item = menu.findItem(R.id.action_about);
     about_menu_item.setTitle(String.format("%s %s", getString(R.string.app_name), BuildConfig.VERSION_NAME));
     return ret;
+  }
+
+  public void dummyAlert(View view) {
+    CharSequence text = "This is not implemented yet.";
+    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
+    toast.show();
   }
 }
