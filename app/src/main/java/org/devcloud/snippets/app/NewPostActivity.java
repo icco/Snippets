@@ -48,7 +48,7 @@ public class NewPostActivity extends FragmentActivity {
         Snippet snippet = new Snippet(message, Const.getUserId(context));
         snippet.save(context);
 
-       // Intent back to Main.
+        // Intent back to Main.
       } else {
         CharSequence text = "Snippets can not be empty.";
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);

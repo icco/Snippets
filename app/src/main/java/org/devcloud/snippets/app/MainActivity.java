@@ -16,8 +16,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.IOException;
-
 public class MainActivity extends FragmentActivity {
 
   public static final int REQUEST_CODE = 0;
