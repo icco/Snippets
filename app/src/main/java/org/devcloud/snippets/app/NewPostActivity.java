@@ -1,6 +1,7 @@
 package org.devcloud.snippets.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -50,6 +51,9 @@ public class NewPostActivity extends FragmentActivity {
         snippet.save(context);
 
         // Intent back to Main.
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
       } else {
         CharSequence text = "Snippets can not be empty.";
         Toast toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
