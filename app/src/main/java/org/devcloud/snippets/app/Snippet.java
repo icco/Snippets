@@ -10,6 +10,8 @@ import android.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import com.google.gson.annotations.Expose;
 
 import java.io.IOException;
@@ -194,10 +196,26 @@ public class Snippet {
     }
   }
 
+  public static Gson getGsonBuilder() {
+    return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+  }
+
   static String getJsonArrayForAll(Context context) {
-    Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    Gson gson = Snippet.getGsonBuilder();
     ArrayList<Snippet> snips = Snippet.getArrayListForAll(context);
     return gson.toJson(snips);
+  }
+
+  static ArrayList<Snippet> parseJson(String json) {
+    ArrayList<Snippet> ret = new ArrayList<Snippet>();
+    Gson gson = getGsonBuilder();
+    JsonParser parser = new JsonParser();
+    JsonArray array = parser.parse(json).getAsJsonArray();
+    for (int i = 0; i < array.size(); i++) {
+      Snippet snip = gson.fromJson(array.get(i), Snippet.class);
+      ret.add(i, snip);
+    }
+    return ret;
   }
 
   public String getUuid() {

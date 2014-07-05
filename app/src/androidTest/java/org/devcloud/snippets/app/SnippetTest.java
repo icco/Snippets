@@ -7,6 +7,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.AndroidTestCase;
 import android.test.ApplicationTestCase;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class SnippetTest extends ApplicationTestCase<Application> {
@@ -32,7 +34,17 @@ public class SnippetTest extends ApplicationTestCase<Application> {
   }
 
   public void testGetJsonArrayForAll() throws Exception {
+    Snippet s = new Snippet("test json1", TEST_USER);
+    s.save(context);
+    s = new Snippet("test json2", TEST_USER);
+    s.save(context);
+    s = new Snippet("test json3", TEST_USER);
+    s.save(context);
 
+    ArrayList<Snippet> parsed1 = Snippet.parseJson(Snippet.getJsonArrayForAll(context));
+    ArrayList<Snippet> parsed2 = Snippet.parseJson(Snippet.getJsonArrayForAll(context));
+
+    assertEquals(parsed1, parsed2);
   }
 
   public void testGetUuid() throws Exception {
