@@ -3,11 +3,7 @@ package org.devcloud.snippets.app;
 import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.test.ActivityInstrumentationTestCase2;
-import android.test.AndroidTestCase;
 import android.test.ApplicationTestCase;
-
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
