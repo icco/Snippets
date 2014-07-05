@@ -23,22 +23,7 @@ public class MainActivity extends FragmentActivity {
   public static final int REQUEST_CODE = 0;
   static final String SIGN_OUT_MESSAGE = "SIGN_OUT";
   private static final String TAG = "MainActivity";
-  private int post_fragment_id, list_fragment_id;
-
-  private void buildUI() {
-    Fragment list_fragment = new SnippetListFragment();
-    Fragment post_fragment = new NewPostFragment();
-
-    getSupportFragmentManager().beginTransaction()
-        .add(R.id.container, post_fragment)
-        .add(R.id.container, list_fragment)
-        .commit();
-
-    // Save IDs
-    list_fragment_id = list_fragment.getId();
-    post_fragment_id = post_fragment.getId();
-  }
-
+  private int list_fragment_id;
 
   /**
    * Initial entry point into the class.
@@ -50,8 +35,16 @@ public class MainActivity extends FragmentActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    // Build UI if we have no state.
     if (savedInstanceState == null) {
-      buildUI();
+      Fragment list_fragment = new SnippetListFragment();
+
+      getSupportFragmentManager().beginTransaction()
+          .add(R.id.container, list_fragment)
+          .commit();
+
+      // Save ID
+      list_fragment_id = list_fragment.getId();
     }
   }
 

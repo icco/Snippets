@@ -14,8 +14,7 @@ import android.widget.EditText;
  */
 public class NewPostFragment extends Fragment {
 
-  public NewPostFragment() {
-  }
+  public NewPostFragment() {}
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
