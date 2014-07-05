@@ -2,7 +2,6 @@ package org.devcloud.snippets.app;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -12,8 +11,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
@@ -113,28 +110,6 @@ public class MainActivity extends FragmentActivity {
     CharSequence text = "This is not implemented yet.";
     Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
     toast.show();
-  }
-
-  public void editTextOnTap(View view) {
-    EditText textView = (EditText) view.findViewById(R.id.edit_message);
-
-    textView.setFocusableInTouchMode(true);
-    textView.setFocusable(true);
-
-    InputMethodManager imm = (InputMethodManager) view.getContext().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-    imm.hideSoftInputFromWindow(textView.getWindowToken(), 0);
-
-    textView.requestFocus();
-    imm.showSoftInput(textView, 0);
-  }
-
-  public void closeKeyboard(View view) {
-    try {
-      InputMethodManager imm = (InputMethodManager) view.getContext().getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-      imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    } catch (NullPointerException e) {
-      Log.e(TAG, e.getMessage(), e);
-    }
   }
 
   @Override
