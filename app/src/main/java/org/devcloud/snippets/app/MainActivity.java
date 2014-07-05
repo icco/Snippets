@@ -145,9 +145,8 @@ public class MainActivity extends FragmentActivity {
     return ret;
   }
 
-  public void dummyAlert(View view) {
-    CharSequence text = "This is not implemented yet.";
-    Toast toast = Toast.makeText(getApplicationContext(), text, Toast.LENGTH_SHORT);
-    toast.show();
+  public void newPost(View view) {
+    Intent intent = new Intent(this, NewPostActivity.class);
+    startActivity(intent);
   }
 }
