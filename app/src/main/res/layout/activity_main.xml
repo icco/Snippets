@@ -14,17 +14,20 @@
     </LinearLayout>
 
     <Button
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|right"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_gravity="bottom|right"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:background="@drawable/round_button"
-        android:textColor="@android:color/primary_text_dark_nodisable"
-        android:textSize="52sp"
+        android:clickable="true"
+        android:onClick="newPost"
+        android:singleLine="true"
         android:text="@string/plus"
-        android:onClick="newPost"/>
-
+        android:textAlignment="center"
+        android:textColor="@android:color/primary_text_dark_nodisable"
+        android:textSize="24sp"
+        android:textStyle="normal"/>
 </FrameLayout>
