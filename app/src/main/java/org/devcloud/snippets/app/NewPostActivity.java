@@ -1,5 +1,6 @@
 package org.devcloud.snippets.app;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +23,13 @@ public class NewPostActivity extends FragmentActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    ActionBar ab = getActionBar();
+    if (ab != null) {
+      ab.setTitle("New Snippet");
+    }
+
     setContentView(R.layout.activity_new_post);
+
     if (savedInstanceState == null) {
       Fragment f = new NewPostFragment();
       getSupportFragmentManager().beginTransaction()
