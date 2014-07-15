@@ -48,6 +48,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.devcloud.snippets.app.MainActivity" />
         </activity>
-    </application>
 
+        <receiver android:name=".WritePostAlarm" />
+    </application>
 </manifest>
