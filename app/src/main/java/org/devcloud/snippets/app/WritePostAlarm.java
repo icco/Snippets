@@ -8,9 +8,10 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 
 public class WritePostAlarm extends BroadcastReceiver {
+
+  public static String NOTIFICATION_ID = "notification-id";
 
   /**
    * This method is called when the BroadcastReceiver is receiving an Intent
@@ -50,21 +51,19 @@ public class WritePostAlarm extends BroadcastReceiver {
   @Override
   public void onReceive(Context context, Intent intent) {
     // Request the notification manager
-
     NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-    // Create a new intent which will be fired if you click on the notification
+    Notification notification = getNotification(context, context.getString(R.string.write_post_notify));
+    int id = intent.getIntExtra(NOTIFICATION_ID, 0);
 
-    Intent intent2 = new Intent("android.intent.action.VIEW");
-
-    intent.setData(Uri.parse("http://www.papers.ch"));
-
-    // Attach the intent to a pending intent
-
-    PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-    // Create the notification
-    Notification notification = new Notification(R.drawable.icon, "Visit our homepage"), System.currentTimeMillis());
-    notification.setLatestEventInfo(context, "Visit our homepage", "http://www.papers.ch", pendingIntent);
     // Fire the notification
-    notificationManager.notify(1, notification);
+    notificationManager.notify(id, notification);
+  }
+
+  private Notification getNotification(Context context, String content) {
+    Notification.Builder builder = new Notification.Builder(context);
+    builder.setContentTitle("Scheduled Notification");
+    builder.setContentText(content);
+    builder.setSmallIcon(R.drawable.greysquare);
+    return builder.build();
   }
 }

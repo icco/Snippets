@@ -15,5 +15,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="plus">+</string>
     <string name="lock">Lock</string>
+    <string name="write_post_notify">Update Snippets?</string>
 
 </resources>
