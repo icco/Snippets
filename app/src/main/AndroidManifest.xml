@@ -17,6 +17,9 @@
     <!-- To retrieve the account name (email) as part of sign-in: -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
+    <!-- So we can set alarm -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/greysquare"
@@ -49,6 +52,12 @@
                 android:value="org.devcloud.snippets.app.MainActivity" />
         </activity>
 
-        <receiver android:name=".WritePostAlarm" />
+        <receiver android:name=".WritePostAlarm" android:exported="false" />
+
+        <receiver android:name=".BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>

@@ -8,10 +8,13 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class WritePostAlarm extends BroadcastReceiver {
 
   public static String NOTIFICATION_ID = "notification-id";
+  private static final String TAG = "WritePostAlarm";
+
 
   /**
    * This method is called when the BroadcastReceiver is receiving an Intent
@@ -50,17 +53,24 @@ public class WritePostAlarm extends BroadcastReceiver {
    */
   @Override
   public void onReceive(Context context, Intent intent) {
+    Log.d(TAG, "Recurring alarm; popping up notification.");
+
+    // Create PendingIntent (what happens when we click notification).
+    Intent notificationIntent = new Intent(context, MainActivity.class);
+    PendingIntent pInt = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+
     // Request the notification manager
     NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-    Notification notification = getNotification(context, context.getString(R.string.write_post_notify));
+    Notification notification = getNotification(context, context.getString(R.string.write_post_notify), pInt);
     int id = intent.getIntExtra(NOTIFICATION_ID, 0);
 
     // Fire the notification
     notificationManager.notify(id, notification);
   }
 
-  private Notification getNotification(Context context, String content) {
+  private Notification getNotification(Context context, String content, PendingIntent pi) {
     Notification.Builder builder = new Notification.Builder(context);
+    builder.setContentIntent(pi);
     builder.setContentTitle("Scheduled Notification");
     builder.setContentText(content);
     builder.setSmallIcon(R.drawable.greysquare);
