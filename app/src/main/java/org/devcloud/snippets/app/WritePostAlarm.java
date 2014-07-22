@@ -12,9 +12,8 @@ import android.util.Log;
 
 public class WritePostAlarm extends BroadcastReceiver {
 
-  public static String NOTIFICATION_ID = "notification-id";
   private static final String TAG = "WritePostAlarm";
-
+  public static String NOTIFICATION_ID = "notification-id";
 
   /**
    * This method is called when the BroadcastReceiver is receiving an Intent

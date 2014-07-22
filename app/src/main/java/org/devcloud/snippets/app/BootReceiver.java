@@ -15,7 +15,7 @@ public class BootReceiver extends BroadcastReceiver {
     PendingIntent alarmIntent;
 
     if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-      alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+      alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
       Intent todo_intent = new Intent(context, WritePostAlarm.class);
       PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 234324243, todo_intent, 0);
@@ -24,7 +24,8 @@ public class BootReceiver extends BroadcastReceiver {
           AlarmManager.ELAPSED_REALTIME_WAKEUP,
           AlarmManager.INTERVAL_DAY,
           AlarmManager.INTERVAL_DAY,
-          pendingIntent);
+          pendingIntent
+      );
     }
   }
 }
