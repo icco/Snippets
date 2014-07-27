@@ -10,9 +10,9 @@ import android.util.Log;
 
 public class BootReceiver extends BroadcastReceiver {
 
-  private static final String TAG = "BootReceiver";
   public static final String START_ALARM_ACTION = String.format("%s.START", BootReceiver.class.getCanonicalName());
   public static final String BOOT_ACTION = "android.intent.action.BOOT_COMPLETED";
+  private static final String TAG = "BootReceiver";
 
   @Override
   public void onReceive(Context context, Intent intent) {
