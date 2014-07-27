@@ -1,5 +1,6 @@
 package org.devcloud.snippets.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,10 +25,12 @@ public class MainActivity extends FragmentActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    Context context = getApplicationContext();
 
     // Make sure alarm has started...
-    Intent alarmIntent = new Intent(getApplicationContext(), BootReceiver.class);
-    startService(alarmIntent);
+    Intent alarmIntent = new Intent(context, BootReceiver.class);
+    alarmIntent.setAction(BootReceiver.START_ALARM_ACTION);
+    context.sendBroadcast(alarmIntent);
 
     // Build UI if we have no state.
     if (savedInstanceState == null) {
