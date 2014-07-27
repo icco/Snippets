@@ -15,6 +15,8 @@ APP_BASE_NAME=`basename "$0"`
 # Use the maximum available, or set MAX_FD != -1 to use that value.
 MAX_FD="maximum"
 
+JAVA_HOME=`/usr/libexec/java_home -v 1.7`
+
 warn ( ) {
     echo "$*"
 }
