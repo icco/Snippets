@@ -35,9 +35,13 @@ public class BootReceiver extends BroadcastReceiver {
           Intent todo_intent = new Intent(context, WritePostAlarm.class);
           alarmIntent = PendingIntent.getBroadcast(context, 234324243, todo_intent, 0);
 
+          // Cancel existing alarms
+          alarmMgr.cancel(alarmIntent);
+
+          // Create new alarm
           alarmMgr.setInexactRepeating(
               AlarmManager.ELAPSED_REALTIME_WAKEUP,
-              AlarmManager.INTERVAL_FIFTEEN_MINUTES, // When this first fires
+              AlarmManager.INTERVAL_DAY, // When this first fires
               AlarmManager.INTERVAL_DAY, // How often it repeats
               alarmIntent
           );

@@ -72,7 +72,10 @@ public class WritePostAlarm extends BroadcastReceiver {
     builder.setContentIntent(pi);
     builder.setContentTitle("Scheduled Notification");
     builder.setContentText(content);
-    builder.setSmallIcon(R.drawable.greysquare);
+    // TODO(nat@natwelch.com): Get better icon.
+    builder.setSmallIcon(R.drawable.ic_plusone_small_off_client);
+    builder.setAutoCancel(true);
+    builder.setPriority(Notification.PRIORITY_LOW);
     return builder.build();
   }
 }
