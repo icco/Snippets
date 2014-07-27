@@ -5,9 +5,12 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 
 public class BootReceiver extends BroadcastReceiver {
+
+  private static final String TAG = "BootReceiver";
 
   @Override
   public void onReceive(Context context, Intent intent) {
@@ -22,10 +25,12 @@ public class BootReceiver extends BroadcastReceiver {
 
       alarmMgr.setInexactRepeating(
           AlarmManager.ELAPSED_REALTIME_WAKEUP,
-          AlarmManager.INTERVAL_DAY,
-          AlarmManager.INTERVAL_DAY,
+          AlarmManager.INTERVAL_FIFTEEN_MINUTES, // When this first fires
+          AlarmManager.INTERVAL_DAY, // How often it repeats
           pendingIntent
       );
+    } else {
+      Log.d(TAG, String.format("Received intent: %s", intent));
     }
   }
 }

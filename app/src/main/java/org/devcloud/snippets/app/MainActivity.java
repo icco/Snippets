@@ -25,6 +25,10 @@ public class MainActivity extends FragmentActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    // Make sure alarm has started...
+    Intent alarmIntent = new Intent(getApplicationContext(), BootReceiver.class);
+    startService(alarmIntent);
+
     // Build UI if we have no state.
     if (savedInstanceState == null) {
       Fragment list_fragment = new SnippetListFragment();
