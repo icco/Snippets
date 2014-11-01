@@ -21,3 +21,7 @@ Note: I value security highly, so I'll try and keep everything secure. One thing
 ## Release
 
  * `./gradlew assembleRelease && cp app/build/outputs/apk/app-release.apk ~/Desktop/; ./gradlew clean`
+
+## TODO
+
+ * I'd love to add photo saving to this.
